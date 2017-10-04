@@ -1,7 +1,10 @@
 const path = require('path');
-const hwp = require('html-webpack-plugin');
+const Myplugin = require('swnb-webpack-learning-plugin');
+const html_templat_path = path.resolve('./app/template/template.html');
 module.exports = {
-    entry: path.join(__dirname, 'app', 'index'),
+    entry: {
+        index: path.join(__dirname, 'app', 'index')
+    },
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, 'dist')
@@ -19,6 +22,12 @@ module.exports = {
                 query: {
                     presets: ['env', 'react']
                 }
+            },
+            {
+                test: /\.css$/,
+                include: [path.resolve(__dirname, 'app')],
+                exclude: [path.resolve(__dirname, 'node_modules')],
+                loader: ['style-loader', 'css-loader']
             }
         ]
     },
@@ -29,5 +38,5 @@ module.exports = {
     devServer: {
         contentBase: path.join('./dist')
     },
-    plugins: [new hwp({ title: 'react' })]
+    plugins: [new Myplugin(html_templat_path, { title: 'zzz' })]
 };

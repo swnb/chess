@@ -1,19 +1,35 @@
+import './src/index.css';
+
 import React from 'react';
 import ReactDom from 'react-dom';
 
-class ShoppingList extends React.Component {
+function Formdata(props) {
+    return <h1 onClick={props.onClick}>{props.data}</h1>;
+}
+class Test extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            one: 12,
+            two: 14
+        };
+        this.clickEvent = this.clickEvent.bind(this);
+    }
+    clickEvent() {
+        this.setState(preState => ({
+            one: preState.one + 'zz'
+        }));
+    }
     render() {
         return (
-            <div className="shopping-list">
-                <h1>Shopping List for {this.props.name}</h1>
-                <ul>
-                    <li>Instagram</li>
-                    <li>WhatsApp</li>
-                    <li>Oculus</li>
-                </ul>
+            <div>
+                <Formdata onClick={this.clickEvent} data={this.state.one} />
+                <h2 onClick={this.clickEvent}>{this.state.two}</h2>
             </div>
         );
     }
 }
 
-ReactDom.render(<h1>hello world</h1>, document.querySelector('body'));
+ReactDom.render(<Test />, document.querySelector('.container'));
+
+// 运行js直到<>就被当成html 运行html直到{}
