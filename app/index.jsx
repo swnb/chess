@@ -1,35 +1,38 @@
-import './src/index.css';
-
 import React from 'react';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
+import Remarkable from 'remarkable';
 
-function Formdata(props) {
-    return <h1 onClick={props.onClick}>{props.data}</h1>;
-}
-class Test extends React.Component {
+class MarkdownEditor extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            one: 12,
-            two: 14
-        };
-        this.clickEvent = this.clickEvent.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.state = { value: 'Type some *markdown* here!' };
     }
-    clickEvent() {
-        this.setState(preState => ({
-            one: preState.one + 'zz'
-        }));
+
+    handleChange(e) {
+        this.setState({ value: e.target.value });
     }
+
+    getRawMarkup() {
+        const md = new Remarkable();
+        return { __html: md.render(this.state.value) };
+    }
+
     render() {
         return (
-            <div>
-                <Formdata onClick={this.clickEvent} data={this.state.one} />
-                <h2 onClick={this.clickEvent}>{this.state.two}</h2>
+            <div className="MarkdownEditor">
+                <h3>Input</h3>
+                <textarea
+                    onChange={this.handleChange}
+                    defaultValue={this.state.value}
+                />
+                <h3>Output</h3>
+                <div
+                    className="content"
+                    dangerouslySetInnerHTML={this.getRawMarkup()}
+                />
             </div>
         );
     }
 }
-
-ReactDom.render(<Test />, document.querySelector('.container'));
-
-// 运行js直到<>就被当成html 运行html直到{}
+ReactDOM.render(<MarkdownEditor />, document.querySelector('.container'));

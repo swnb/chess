@@ -3,7 +3,8 @@ const Myplugin = require('swnb-webpack-learning-plugin');
 const html_templat_path = path.resolve('./app/template/template.html');
 module.exports = {
     entry: {
-        index: path.join(__dirname, 'app', 'index')
+        index: path.join(__dirname, 'app', 'index'),
+        study: path.join(__dirname, 'app', 'study')
     },
     output: {
         filename: '[name].js',
