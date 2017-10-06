@@ -2,7 +2,7 @@
 this is  a personal project for react
 
  先写了一点点，等待后续重构
- 代码写在分支first-day上，
+ 先写一点点代码写在[分支first-day](https://github.com/swnb/react-project/tree/first-day)上，
 
 主要对于react的棋盘教程的案例进行扩展，可以自定义棋盘大小，还有判断输赢的算法做了优化。
 
