@@ -7,7 +7,7 @@ this is  a personal project for react
 主要对于react的棋盘教程的案例进行扩展，可以自定义棋盘大小，还有判断输赢的算法做了优化。
 
 ```shell
-    git clone -b first-day git@github.com:swnb/react-project.git
+    git clone -b first-day https://github.com/swnb/react-project.git
 
     cd react-project
 
