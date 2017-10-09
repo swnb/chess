@@ -4,7 +4,8 @@ this is  a personal project for react
  先写了一点点，等待后续重构
  先写一点点代码写在[分支first-day](https://github.com/swnb/react-project/tree/first-day)上，
 
-主要对于react的棋盘教程的案例进行扩展，可以自定义棋盘大小，还有判断输赢的算法做了优化。
+主要对于react的棋盘教程的案例进行扩展，可以自定义棋盘大小，自定义胜利的棋子数目,还有判断输赢的算法做了优化。
+效果在[这里](https://swnb.github.io/react-project/views/q.html),欢迎大家帮我测试一下...后面放入服务器,加点颜色,加入websocket,做成恶意定制的游戏
 
 ```shell
     git clone -b first-day https://github.com/swnb/react-project.git
@@ -16,7 +17,7 @@ this is  a personal project for react
     yarn run dev 
 ```
 
-如果浏览器没有打开的话,之后进入路由 [/index.html](http://localhost:8080/index.html)
+如果浏览器没有打开的话,直接进入路由 [/index.html](http://localhost:8080/index.html)
 
 后面添加一扩展方式,今天写完太累了
 
