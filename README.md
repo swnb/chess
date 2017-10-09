@@ -15,7 +15,7 @@ this is  a personal project for react
 
     yarn run dev 
 ```
-之后进入路由 [/study.html](http://localhost:8080/study.html)
+
 如果浏览器没有打开的话,之后进入路由 [/index.html](http://localhost:8080/index.html)
 
 后面添加一扩展方式,今天写完太累了
