@@ -16,5 +16,8 @@ this is  a personal project for react
     yarn run dev 
 ```
 之后进入路由 [/study.html](http://localhost:8080/study.html)
+如果浏览器没有打开的话,之后进入路由 [/index.html](http://localhost:8080/index.html)
+
+后面添加一扩展方式,今天写完太累了
 
 附带一个自己写的webpack学习的插件，有兴趣，可以在[这里看](https://github.com/swnb/webpack-plugin)，主要实现html-webpack-plugin的一些简答功能，比如模板等。
