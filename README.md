@@ -23,12 +23,16 @@ this is  a personal project for react
     yarn run dev 
 ```
 
+如果浏览器没有打开的话,直接进入路由 [/index.html](http://localhost:8080/index.html)
+
+
 第三天代做的事情
 * 将它改造成为`websocket`
 * 添加颜色,优化代码,历史记录用红线连接起来..
+* 重构代码,逻辑组件和ui组件分离
 
-如果浏览器没有打开的话,直接进入路由 [/index.html](http://localhost:8080/index.html)
 
-后面添加`websocket`,加入服务端,`gh-page`的测试的[地址在这里](https://swnb.github.io/react-project/views/second.html)
+`gh-page`的测试的[地址在这里](https://swnb.github.io/react-project/views/second.html)
+
 
 附带一个自己写的webpack学习的插件，有兴趣，可以在[这里看](https://github.com/swnb/webpack-plugin)，主要实现html-webpack-plugin的一些简答功能，比如模板等。
