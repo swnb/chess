@@ -15,7 +15,8 @@ this is  a personal project for react
 
 **目前的**效果图
 ![](./picture/pic.png)
-![](,/picture/pic1.png)
+
+![](./picture/pic1.png)
 
 ```shell
     git clone -b second-day https://github.com/swnb/react-project.git
