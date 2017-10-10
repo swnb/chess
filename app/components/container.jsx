@@ -32,16 +32,14 @@ class Container extends React.Component {
     render() {
         if (!this.state.render) {
             return (
-                <form action="">
-                    <fieldset>
-                        <legend>输入你的希望的棋盘数目</legend>
-                        <h3>输入你想需要的棋盘大小</h3>
-                        <input type="text" ref="size" />
-                        <h3>输入判断输赢的数目</h3>
-                        <input type="text" ref="winCount" placeholder="5" />
-                        <button onClick={this.initGame}>开始棋盘游戏</button>
-                    </fieldset>
-                </form>
+                <fieldset>
+                    <legend>输入你的希望的棋盘数目</legend>
+                    <h3>输入你想需要的棋盘大小</h3>
+                    <input type="text" ref="size" />
+                    <h3>输入判断输赢的数目</h3>
+                    <input type="text" ref="winCount" placeholder="5" />
+                    <button onClick={this.initGame}>开始棋盘游戏</button>
+                </fieldset>
             );
         } else {
             return (
