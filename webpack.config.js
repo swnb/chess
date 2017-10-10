@@ -1,10 +1,12 @@
 const path = require('path');
 const Myplugin = require('swnb-webpack-learning-plugin');
 const html_templat_path = path.resolve('./app/template/template.html');
+const resolve = path.resolve;
 module.exports = {
     entry: {
         index: path.join(__dirname, 'app', 'index'),
         markdown: path.join(__dirname, 'app', 'markdown')
+        // test: path.join(__dirname, 'app', 'template', 'docker')
     },
     output: {
         filename: '[name].js',
@@ -33,7 +35,10 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['.json', '.js', '.jsx', '.css']
+        extensions: ['.json', '.js', '.jsx', '.css'],
+        alias: {
+            com: resolve('./app/components')
+        }
     },
     devtool: 'source-map',
     devServer: {

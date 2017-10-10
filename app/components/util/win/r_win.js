@@ -5,12 +5,12 @@ export default (arr, arrP, sig, index, win_count) => {
         if (!arr[iP]) {
             return;
         }
-        //列数相同
-        if (arrP[iP][1] === sig[1]) {
+        //行数相同
+        if (arrP[iP][0] === sig[0]) {
             //元素相同
             if (arr[index] === arr[iP]) {
-                //返回行数目
-                r_arr.push(e[0]);
+                //返回列数目
+                r_arr.push(e[1]);
             }
         }
     });
@@ -19,7 +19,7 @@ export default (arr, arrP, sig, index, win_count) => {
         return false;
     }
     //排序
-    r_arr = r_arr.sort();
+    // r_arr = r_arr.sort();
     let r_arr_flag = false;
     //判断存在递增数列里面最长的是否大于等于win_count
     function arr_split(arr) {

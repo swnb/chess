@@ -6,7 +6,7 @@ export default (arr, arrP, sig, index, win_count) => {
             return;
         }
         //对角线相同的话
-        if (arrP[iP][0] - sig[0] === sig[1] - arrP[iP][1]) {
+        if (arrP[iP][0] - sig[0] === arrP[iP][1] - sig[1]) {
             //元素相同
             if (arr[index] === arr[iP]) {
                 //返回行数目
@@ -19,7 +19,7 @@ export default (arr, arrP, sig, index, win_count) => {
         return false;
     }
     //排序
-    r_arr = r_arr.sort();
+    // r_arr = r_arr.sort();
     let r_arr_flag = false;
     //判断存在递增数列里面最长的是否大于等于win_count
     function arr_split(arr) {
