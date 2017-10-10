@@ -1,11 +1,11 @@
 import '../src/index.css';
 
+import { getAction, store } from 'com/store';
+import c_win from 'com/util/win/c_win';
+import r_c_left_win from 'com/util/win/r_c_left_win';
+import r_c_right_win from 'com/util/win/r_c_right_win';
+import r_win from 'com/util/win/r_win';
 import React from 'react';
-
-import c_win from './util/win/c_win';
-import r_c_left_win from './util/win/r_c_left_win';
-import r_c_right_win from './util/win/r_c_right_win';
-import r_win from './util/win/r_win';
 
 // 不要每次全部判断，每次判断这个棋子和它行相同列相同的棋子数目，就行了
 function win(arr, arrP, index, win_count) {
@@ -41,8 +41,7 @@ class Docker extends React.Component {
         const size = Number(this.props.size);
         this.state = {
             next: true,
-            boxArray: Array(size).fill(null),
-            painting: []
+            boxArray: Array(size).fill(null)
         };
         this.win_count = Number(this.props.winCount);
         this.nextMove = this.nextMove.bind(this);
@@ -66,13 +65,11 @@ class Docker extends React.Component {
                 Array_tmp[i] = next ? 'O' : 'X';
                 const flag = win(Array_tmp, this.ArrayP, i, this.win_count);
                 if (flag) {
-                    let position = [...preState.painting];
-                    position.push(Array_tmp);
                     this.winner = next ? 'O' : 'X';
+                    store.dispatch(getAction([...Array_tmp]));
                     return {
                         next: 'over',
-                        boxArray: Array(Number(this.props.size)).fill(null),
-                        painting: position
+                        boxArray: Array(Number(this.props.size)).fill(null)
                     };
                 }
                 return {
@@ -125,4 +122,4 @@ class Box extends React.Component {
     }
 }
 
-export default Docker;
+export { Docker, store };

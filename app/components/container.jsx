@@ -1,4 +1,4 @@
-import Docker from 'com/docker';
+import { Docker, store } from 'com/docker';
 import WinnerPainting from 'com/winnerPainting';
 import React from 'react';
 
@@ -8,7 +8,8 @@ class Container extends React.Component {
         this.state = {
             render: false,
             size: 0,
-            winCount: 5
+            winCount: 5,
+            arrP: []
         };
         this.initGame = this.initGame.bind(this);
     }
@@ -29,6 +30,13 @@ class Container extends React.Component {
             alert('需要数字作为棋盘的大小');
         }
     }
+    componentDidMount() {
+        //相应状态
+        store.subscribe(() => {
+            const arrP = store.getState();
+            this.setState({ arrP });
+        });
+    }
     render() {
         if (!this.state.render) {
             return (
@@ -48,7 +56,10 @@ class Container extends React.Component {
                         size={this.state.size}
                         winCount={this.state.winCount}
                     />
-                    <WinnerPainting />
+                    <WinnerPainting
+                        size={this.state.size}
+                        pos={this.state.arrP}
+                    />
                 </div>
             );
         }

@@ -27,3 +27,14 @@ h1 {
 .line button :focus {
     outline: none;
 }
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.history {
+    margin-top: 10px;
+    transform: scale(0.5);
+}
