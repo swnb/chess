@@ -19,7 +19,7 @@ export default (arr, arrP, sig, index, win_count) => {
         return false;
     }
     //排序
-    r_arr = r_arr.sort();
+    // r_arr = r_arr.sort();
     let r_arr_flag = false;
     //判断存在递增数列里面最长的是否大于等于win_count
     function arr_split(arr) {
