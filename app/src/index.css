@@ -3,17 +3,25 @@ h1 {
     text-align: center;
 }
 
+.title {
+    color: yellowgreen;
+    text-align: center;
+    font-size: 20px;
+    font-family: serif;
+}
+
 .line {
     display: flex;
     justify-content: center;
 }
 
 .line button {
-    width: 20px;
-    height: 20px;
     padding: 2px;
-    background-color: white;
+    width: 30px;
+    height: 30px;
     border: 1px solid #999;
+    background-color: rgba(44, 157, 233, 0.61);
+    font-size: 18px;
 }
 
 .line button :focus {

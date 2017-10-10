@@ -1,11 +1,6 @@
 import Docker from 'com/docker';
+import WinnerPainting from 'com/winnerPainting';
 import React from 'react';
-
-class Show extends React.Component {}
-// ReactDom.render(
-// <Docker size="81" winCount="5" />,
-// document.querySelector('.container')
-// );
 
 class Container extends React.Component {
     constructor(props) {
@@ -50,7 +45,13 @@ class Container extends React.Component {
             );
         } else {
             return (
-                <Docker size={this.state.size} winCount={this.state.winCount} />
+                <div>
+                    <Docker
+                        size={this.state.size}
+                        winCount={this.state.winCount}
+                    />
+                    <WinnerPainting />
+                </div>
             );
         }
     }

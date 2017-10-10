@@ -41,7 +41,8 @@ class Docker extends React.Component {
         const size = Number(this.props.size);
         this.state = {
             next: true,
-            boxArray: Array(size).fill(null)
+            boxArray: Array(size).fill(null),
+            painting: []
         };
         this.win_count = Number(this.props.winCount);
         this.nextMove = this.nextMove.bind(this);
@@ -65,9 +66,13 @@ class Docker extends React.Component {
                 Array_tmp[i] = next ? 'O' : 'X';
                 const flag = win(Array_tmp, this.ArrayP, i, this.win_count);
                 if (flag) {
+                    let position = [...preState.painting];
+                    position.push(Array_tmp);
+                    this.winner = next ? 'O' : 'X';
                     return {
                         next: 'over',
-                        boxArray: Array(Number(this.props.size)).fill(null)
+                        boxArray: Array(Number(this.props.size)).fill(null),
+                        painting: position
                     };
                 }
                 return {
@@ -85,9 +90,9 @@ class Docker extends React.Component {
         const item = (start, end) => arr_tmp.slice(start, end + 1);
         const state = () => {
             if (this.state.next === 'over') {
-                return 'over';
+                return '赢的人是 ' + this.winner;
             }
-            return this.state.next ? 'X' : 'O';
+            return this.state.next ? '下一个棋子是:X' : '下一个棋子是:O';
         };
         const size = Math.sqrt(Number(this.props.size));
         const Q = () => {
@@ -105,7 +110,7 @@ class Docker extends React.Component {
         };
         return (
             <div>
-                <div className="line">{state()}</div>
+                <div className="title">{state()}</div>
                 {Q()}
             </div>
         );
@@ -120,5 +125,4 @@ class Box extends React.Component {
     }
 }
 
-class Show extends React.Component {}
 export default Docker;
