@@ -21,6 +21,6 @@ this is  a personal project for react
 ```
 如果浏览器没有打开的话,之后进入路由 [/index.html](http://localhost:8080/index.html)
 
-后面添加`websocket`,加入服务端,现在测试的[地址在这里]()
+后面添加`websocket`,加入服务端,`gh-page`的测试的[地址在这里](https://swnb.github.io/react-project/views/second.html)
 
 附带一个自己写的webpack学习的插件，有兴趣，可以在[这里看](https://github.com/swnb/webpack-plugin)，主要实现html-webpack-plugin的一些简答功能，比如模板等。
