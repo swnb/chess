@@ -1,6 +1,6 @@
 const path = require('path');
 const Myplugin = require('swnb-webpack-learning-plugin');
-const html_templat_path = path.resolve('./app/template/template.html');
+const html_templat_path = path.resolve('./template/template.html');
 const resolve = path.resolve;
 module.exports = {
     entry: {
@@ -40,7 +40,8 @@ module.exports = {
             com: resolve('./app/components'),
             base: resolve('./app/components/base'),
             src: resolve('./app/src'),
-            util: resolve('./app/components/util')
+            util: resolve('./app/util'),
+            store: resolve('./app/redux')
         }
     },
     devtool: 'source-map',
