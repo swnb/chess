@@ -2,8 +2,8 @@ import 'src/index.css';
 
 import Checkerboard from 'base/checkerboard';
 import Clickbutton from 'base/clickbutton';
-import { getAction, store } from 'com/store';
 import React from 'react';
+import { getAction, store } from 'store/store';
 import win from 'util/win/ifwin';
 
 class Checkerplayer extends React.Component {

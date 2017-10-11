@@ -1,5 +1,5 @@
 import HistoryList from 'base/historylist';
-import { Checkerplayer, store } from 'com/docker';
+import { Checkerplayer, store } from 'com/winner/getwinner';
 import React from 'react';
 
 class Container extends React.Component {

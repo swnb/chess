@@ -1,7 +1,7 @@
-import c_win from 'com/util/win/c_win';
-import r_c_left_win from 'com/util/win/r_c_left_win';
-import r_c_right_win from 'com/util/win/r_c_right_win';
-import r_win from 'com/util/win/r_win';
+import c_win from 'util/win/c_win';
+import r_c_left_win from 'util/win/r_c_left_win';
+import r_c_right_win from 'util/win/r_c_right_win';
+import r_win from 'util/win/r_win';
 
 function win(arr, arrP, index, win_count) {
     //arr 是真实的棋盘元素对象,arrP是位子元素对象,一一对应[x,y],后面是下落棋子的位子,判断赢的数目

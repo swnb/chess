@@ -1,4 +1,4 @@
-import Container from 'com/container';
+import Container from 'com/init-checkboard/initplayer';
 import React from 'react';
 import ReactDom from 'react-dom';
 
