@@ -14,8 +14,9 @@ this is  a personal project for react
 这个项目主要对于`react`的棋盘教程的案例进行扩展，可以自定义你的棋盘大小，还有判断输赢的算法做了优化。
 
 **目前的**效果图
-![](./picture/pic.png)
 
+![](./picture/pic2.png)
+![](./picture/pic.png)
 ![](./picture/pic1.png)
 
 ```shell
