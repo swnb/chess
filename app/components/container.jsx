@@ -1,5 +1,5 @@
-import { Docker, store } from 'com/docker';
-import WinnerPainting from 'com/winnerPainting';
+import HistoryList from 'base/historylist';
+import { Checkerplayer, store } from 'com/docker';
 import React from 'react';
 
 class Container extends React.Component {
@@ -52,14 +52,11 @@ class Container extends React.Component {
         } else {
             return (
                 <div>
-                    <Docker
+                    <Checkerplayer
                         size={this.state.size}
                         winCount={this.state.winCount}
                     />
-                    <WinnerPainting
-                        size={this.state.size}
-                        pos={this.state.arrP}
-                    />
+                    <HistoryList size={this.state.size} pos={this.state.arrP} />
                 </div>
             );
         }

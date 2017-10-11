@@ -1,18 +1,13 @@
-import '../src/index.css';
-
 import React from 'react';
 
-class Painting extends React.Component {
+class Checkerboard extends React.Component {
     constructor(props) {
         super(props);
     }
     render() {
-        const arr = this.props.pos.map((e, i) => {
-            return <button key={i}>{e}</button>;
-        });
-        const item = (start, end) => arr.slice(start, end + 1);
-        console.log(size);
+        const arr = this.props.arrP;
         const size = this.props.size;
+        const item = (start, end) => arr.slice(start, end + 1);
         const Q = () => {
             let dom = [];
             let index = 0;
@@ -26,8 +21,8 @@ class Painting extends React.Component {
             }
             return dom;
         };
-        return <div className="history">{Q()}</div>;
+        return Q();
     }
 }
 
-export default Painting;
+export default Checkerboard;

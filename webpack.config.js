@@ -37,7 +37,10 @@ module.exports = {
     resolve: {
         extensions: ['.json', '.js', '.jsx', '.css'],
         alias: {
-            com: resolve('./app/components')
+            com: resolve('./app/components'),
+            base: resolve('./app/components/base'),
+            src: resolve('./app/src'),
+            util: resolve('./app/components/util')
         }
     },
     devtool: 'source-map',
