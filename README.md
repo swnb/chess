@@ -11,7 +11,7 @@ this is  a personal project for react
 主要对于react的棋盘教程的案例进行扩展，可以自定义棋盘大小，自定义胜利的棋子数目,还有判断输赢的算法做了优化。
 现在的暂时的效果在[这里](https://swnb.github.io/react-project/views/second.html),欢迎大家帮我测试一下...后面放入服务器,加点颜色,加入websocket,做成可以定制的游戏,代码日后可以开个专题来说.
 
-这个项目主要对于react的棋盘教程的案例进行扩展，可以自定义你的棋盘大小，还有判断输赢的算法做了优化。
+这个项目主要对于`react`的棋盘教程的案例进行扩展，可以自定义你的棋盘大小，还有判断输赢的算法做了优化。
 
 **目前的**效果图
 ![](./picture/pic.png)
@@ -34,7 +34,7 @@ this is  a personal project for react
 第三天代做的事情
 * 将它改造成为`websocket`
 * 添加颜色,优化代码,历史记录用红线连接起来..
-* 重构代码,逻辑组件和ui组件分离
+* ~~重构代码,逻辑组件和ui组件分离~~ (完成) 
 
 
 `gh-page`的测试的[地址在这里](https://swnb.github.io/react-project/views/second.html)
