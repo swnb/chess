@@ -2,7 +2,7 @@ import HistoryList from 'base/historylist';
 import { Checkerplayer, store } from 'com/winner/getwinner';
 import React from 'react';
 
-class Container extends React.Component {
+class InitPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -63,4 +63,4 @@ class Container extends React.Component {
     }
 }
 
-export default Container;
+export default InitPage;

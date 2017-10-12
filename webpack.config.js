@@ -42,7 +42,8 @@ module.exports = {
             base: resolve('./app/components/base'),
             src: resolve('./app/src'),
             util: resolve('./app/util'),
-            store: resolve('./app/redux')
+            store: resolve('./app/redux'),
+            api: resolve('./app/api')
         }
     },
     devtool: 'source-map',

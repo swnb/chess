@@ -1,4 +1,4 @@
-import 'src/index.css';
+import 'src/history.css';
 
 import Checkerboard from 'base/checkerboard';
 import React from 'react';

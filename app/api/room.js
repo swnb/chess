@@ -1,43 +1,37 @@
 import io from 'socket.io-client';
 
-//房间id 选边 {init(),next(p)} errFunc
-const connect = (roomId, chooseSide, hocks, errFunc) => {
-    // 传递位子和下落棋子的位子
-    const dispatch = function(chooseSide, p) {
-        if (!room.id) {
-            alert('还没有连接');
-        }
-        room.emit('next', chooseSide, p);
-    };
+const roomParse = roomId => {
+    return `/${roomId}`;
+    // return `http://location.host/checkerPlayer/${room}`;
+};
 
-    const exit = () => {
-        room.close();
-    };
-
+//房间id ;选边 ;{init(),next(p),exit(e)} ;errFunc
+const connect = (roomId, hocks, chooseSide = null) => {
     //将roomId整合成url连接
     const url = roomParse(roomId);
-    const room = io.connect(url);
+    const room = io(url);
+
     room.on('connect', function() {
         //连接发送roomId
         room.emit(`${roomId}`, chooseSide);
 
         room.on('init', who => {
-            //调用hock的函数
-            hocks.init();
-            room.on('next', hocks.next);
+            hocks.init(who);
         });
 
-        room.on(
-            'disconnect',
-            errFunc ||
-                function(e) {
-                    console.log(err);
-                }
-        );
+        room.on('next', hocks.next);
+        room.on('disconnect', hocks.exit);
     });
-    return { dispatch, exit };
+    const connection = {
+        // 传递位子和下落棋子的位子
+        dispatch: function(chooseSide, p) {
+            room.emit('next', chooseSide, p);
+        },
+        exit: () => {
+            room.close();
+        }
+    };
+    return connection;
 };
 
-const roomParse = room => {
-    return `http://location.host/checkerPlayer/${room}`;
-};
+export default connect;

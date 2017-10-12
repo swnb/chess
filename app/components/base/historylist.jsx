@@ -1,3 +1,5 @@
+import 'src/index.css';
+
 import CheckerHistory from 'base/history';
 import React from 'react';
 

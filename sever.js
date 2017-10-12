@@ -3,7 +3,7 @@ const util = require('util');
 const path = require('path');
 
 const config = require(__dirname + '/config');
-const websocker = require(__dirname + '/controllers');
+const websocket = require(__dirname + '/controllers/websocker/websocket');
 
 const Koa = require('koa');
 const static = require('koa-static');
@@ -19,8 +19,8 @@ const main = async ctx => {
     files.forEach(file => {
         const filePath = path.join(contrPath, file);
         const { urlPath, get, post } = require(filePath);
-        get ? router.get(urlPath, get) : void 0;
-        post ? router.post(urlPath, post) : void 0;
+        get ? router.get(urlPath, get) : null;
+        post ? router.post(urlPath, post) : null;
     });
 
     //静态server
@@ -31,6 +31,8 @@ const main = async ctx => {
 
     const server = app.listen(config.port);
 
+    websocket(server);
     console.log(`server is running at port ${config.port}`);
 };
+
 module.exports = main;
