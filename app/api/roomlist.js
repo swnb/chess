@@ -4,7 +4,9 @@ import io from 'socket.io-client';
 const getRoomList = hocks => {
     const getRoomList = io('/getRoomList');
     getRoomList.on('connect', () => {
-        getRoomList.on('room list', hocks.setList);
+        getRoomList.on('room list', list => {
+            hocks.setList(list);
+        });
     });
 };
 

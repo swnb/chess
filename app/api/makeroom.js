@@ -8,11 +8,14 @@ const makeRoom = (roomId, size, winCount, hocks) => {
         socket.on('room init', () => {
             hocks.next();
         });
-        socket.on('room-full', () => {
+        socket.on('room full', () => {
             hocks.err();
         });
         socket.on('disconnect', () => {
             alert('服务器出错了');
+        });
+        socket.on('into room', url => {
+            // hocks.redirect(url);
         });
     });
 };

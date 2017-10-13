@@ -6,27 +6,35 @@ const chooseRoom = require(path.join(__dirname, './namespace/chooseroom'));
 const roomList = require(path.join(__dirname, './namespace/roomlist'));
 const makeRoom = require(path.join(__dirname, './namespace/makeroom'));
 
-global.roomList = [
+global.emptyRoomList = [
     { module: { size: 12, winCount: 6 }, id: 'who' },
     { module: { size: 13, winCount: 5 }, id: 'who' }
 ];
 
-//重写他的push方法,最为id的双向绑定
-global.roomList.push = function(arg) {
+global.playingRoomList = [];
+
+//重写他的方法,做为id的双向绑定
+global.emptyRoomList.push = function(arg) {
     global.id.push(arg.id);
-    Array.prototype.push.call(global, arg);
+    Array.prototype.push.call(global.emptyRoomList, arg);
+};
+global.emptyRoomList.remove = function(arg) {
+    const index = global.id.indexOf(arg);
+    global.emptyRoomList.splice(index, 1);
+    global.id.splice(index, 1);
 };
 
-console.log(`room list 生成`);
+console.log('room list 生成');
 
-global.id = global.roomList.map(e => e.id);
+//for test
+global.id = global.emptyRoomList.map(e => e.id);
 
 const main = httpServer => {
     const io = socketIo(httpServer);
-    chooseRoom(io);
-    // room(io);
     const updateRoomList = roomList(io);
-
+    chooseRoom(io, updateRoomList);
+    // room(io)
     makeRoom(io, updateRoomList);
 };
+
 module.exports = main;

@@ -8,6 +8,6 @@ const func = async ctx => {
 };
 
 module.exports = {
-    urlPath: '/ssss',
+    urlPath: '/test',
     get: func
 };

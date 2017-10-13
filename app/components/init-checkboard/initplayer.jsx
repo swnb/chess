@@ -14,6 +14,10 @@ class InitPage extends React.Component {
         };
         this.initGame = this.initGame.bind(this);
     }
+    redirect(url) {
+        location.href = url;
+        window.reload();
+    }
     initGame() {
         if (
             this.refs.size.value &&
@@ -29,18 +33,23 @@ class InitPage extends React.Component {
                 alert('需要数字!来表示棋盘的大小或者输赢规则');
             } else {
                 const hocks = {
-                    next() {
-                        console.log('yes');
+                    next: () => {
+                        alert('你需要等到下一个人进入房间和你玩耍,在这之前,你可以熟悉规则');
+                        console.log('room made');
+                        this.setState({
+                            size: Math.pow(size, 2),
+                            winCount: winCount,
+                            render: true
+                        });
                     },
                     err() {
                         alert('请更新一下房间名看看吧');
+                    },
+                    redirect: url => {
+                        this.redirect(url);
                     }
                 };
-                // this.setState({
-                //     size: Math.pow(size, 2),
-                //     winCount: winCount,
-                //     render: true
-                // });
+
                 makeRoom(roomid, size, winCount, hocks);
             }
         } else {

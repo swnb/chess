@@ -1,9 +1,9 @@
 const getRoomList = io => {
     const getList = io.of('/getRoomList').on('connection', socket => {
-        socket.emit('room list', global.roomList);
+        socket.emit('room list', global.emptyRoomList);
     });
     updateRoomList = () => {
-        getList.emit('room list', global.roomList);
+        getList.emit('room list', global.emptyRoomList);
     };
     return updateRoomList;
 };

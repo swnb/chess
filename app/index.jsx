@@ -1,3 +1,4 @@
+import chooseRoom from 'api/chooseroom';
 import roomlist from 'api/roomlist';
 import RoomPage from 'base/roompage';
 import InitPage from 'com/init-checkboard/initplayer';
@@ -20,7 +21,8 @@ class Index extends React.Component {
         });
     }
     getIntoRoom(e) {
-        let roomId = e.target.children[0].getAttribute('roomid');
+        const roomId = e.target.getAttribute('roomid');
+        chooseRoom(roomId);
     }
     createRoom() {
         this.setState({
