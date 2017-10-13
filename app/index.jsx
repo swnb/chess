@@ -4,16 +4,51 @@ import InitPage from 'com/init-checkboard/initplayer';
 import React from 'react';
 import ReactDom from 'react-dom';
 
-const hocks = {
-    setList(data) {
-        ReactDom.render(
-            <article>
-                <InitPage />
-                <RoomPage room={data} />
-            </article>,
-            document.querySelector('.container')
-        );
+class Index extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            createRoom: false,
+            rooms: []
+        };
+        this.createRoom = this.createRoom.bind(this);
+        this.getIntoRoom = this.getIntoRoom.bind(this);
     }
-};
+    updateRoom(mes) {
+        this.setState({
+            rooms: mes
+        });
+    }
+    getIntoRoom(e) {
+        let roomId = e.target.children[0].getAttribute('roomid');
+    }
+    createRoom() {
+        this.setState({
+            createRoom: true
+        });
+    }
+    componentDidMount() {
+        //钩子
+        const hocks = {
+            setList: mes => {
+                this.updateRoom(mes);
+            }
+        };
+        roomlist(hocks);
+    }
+    render() {
+        if (this.state.createRoom) {
+            return <InitPage />;
+        } else {
+            return (
+                <RoomPage
+                    room={this.state.rooms}
+                    onClick={this.createRoom}
+                    getIntoRoom={this.getIntoRoom}
+                />
+            );
+        }
+    }
+}
 
-roomlist(hocks);
+ReactDom.render(<Index />, document.querySelector('.container'));

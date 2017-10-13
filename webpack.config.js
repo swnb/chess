@@ -5,8 +5,8 @@ const resolve = path.resolve;
 module.exports = {
     entry: {
         index: path.join(__dirname, 'app', 'index'),
-        markdown: path.join(__dirname, 'app', 'markdown')
-        // test: path.join(__dirname, 'app', 'template', 'docker')
+        // markdown: path.join(__dirname, 'app', 'markdown')
+        room: path.join(__dirname, 'app', 'room')
     },
     output: {
         filename: '[name].js',

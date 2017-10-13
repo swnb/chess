@@ -4,6 +4,7 @@ import io from 'socket.io-client';
 const chooseRoom = o => {
     const socket = io('/chooseRoom');
     socket.on('disconnect', o.err);
+    socket.emit('choose room', roomId);
     socket.on('room', mes => {
         const json = JSON.parse(mes);
         switch (parseInt(json.code)) {

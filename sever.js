@@ -29,9 +29,9 @@ const main = async ctx => {
     app.use(router.routes());
     app.use(staticServer);
 
-    const server = app.listen(config.port);
+    const httpServer = app.listen(config.port);
 
-    websocket(server);
+    websocket(httpServer);
     console.log(`server is running at port ${config.port}`);
 };
 

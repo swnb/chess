@@ -1,3 +1,4 @@
+import makeRoom from 'api/makeroom';
 import HistoryList from 'base/historylist';
 import { Checkerplayer, store } from 'com/winner/getwinner';
 import React from 'react';
@@ -14,20 +15,36 @@ class InitPage extends React.Component {
         this.initGame = this.initGame.bind(this);
     }
     initGame() {
-        if (this.refs.size.value && this.refs.winCount.value) {
-            const size = parseInt(this.refs.size.value);
-            const winCount = parseInt(this.refs.winCount.value);
+        if (
+            this.refs.size.value &&
+            this.refs.winCount.value &&
+            this.refs.roomid.value
+        ) {
+            const [size, winCount, roomid] = [
+                parseInt(this.refs.size.value),
+                parseInt(this.refs.winCount.value),
+                this.refs.roomid.value
+            ];
             if (isNaN(size) || isNaN(winCount)) {
-                alert('需要数字!来表示棋盘的大小');
+                alert('需要数字!来表示棋盘的大小或者输赢规则');
             } else {
-                this.setState({
-                    size: Math.pow(size, 2),
-                    winCount: winCount,
-                    render: true
-                });
+                const hocks = {
+                    next() {
+                        console.log('yes');
+                    },
+                    err() {
+                        alert('请更新一下房间名看看吧');
+                    }
+                };
+                // this.setState({
+                //     size: Math.pow(size, 2),
+                //     winCount: winCount,
+                //     render: true
+                // });
+                makeRoom(roomid, size, winCount, hocks);
             }
         } else {
-            alert('需要数字作为棋盘的大小');
+            alert('需要全部填写');
         }
     }
     componentDidMount() {
@@ -41,11 +58,25 @@ class InitPage extends React.Component {
         if (!this.state.render) {
             return (
                 <fieldset>
-                    <legend>输入你的希望的棋盘数目</legend>
-                    <h3>输入你想需要的棋盘大小</h3>
-                    <input type="text" ref="size" />
+                    <legend>输入你的棋盘和期望</legend>
+                    <h3>棋盘大小</h3>
+                    <input type="text" ref="size" required />
+                    <span>
+                        <h4>n x n的棋盘 输入 n</h4>
+                    </span>
                     <h3>输入判断输赢的数目</h3>
-                    <input type="text" ref="winCount" placeholder="5" />
+                    <input
+                        type="text"
+                        ref="winCount"
+                        placeholder="5"
+                        required
+                    />
+                    <span>
+                        <h4>5子相连胜出输入5</h4>
+                    </span>
+                    <h3>为了公平,选边是系统随机决定</h3>
+                    <h3>设置你的roomid</h3>
+                    <input type="text" ref="roomid" required />
                     <button onClick={this.initGame}>开始棋盘游戏</button>
                 </fieldset>
             );
