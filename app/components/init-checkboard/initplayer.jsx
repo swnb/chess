@@ -90,15 +90,33 @@ class InitPage extends React.Component {
                 </fieldset>
             );
         } else {
-            return (
-                <div>
-                    <Checkerplayer
-                        size={this.state.size}
-                        winCount={this.state.winCount}
-                    />
-                    <HistoryList size={this.state.size} pos={this.state.arrP} />
-                </div>
-            );
+            if (!this.state.playing) {
+                return (
+                    <div>
+                        <Checkerplayer
+                            size={this.state.size}
+                            winCount={this.state.winCount}
+                        />
+                        <HistoryList
+                            size={this.state.size}
+                            pos={this.state.arrP}
+                        />
+                    </div>
+                );
+            } else {
+                return (
+                    <div>
+                        <Checkerplayer
+                            size={this.state.size}
+                            winCount={this.state.winCount}
+                        />
+                        <HistoryList
+                            size={this.state.size}
+                            pos={this.state.arrP}
+                        />
+                    </div>
+                );
+            }
         }
     }
 }
