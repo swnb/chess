@@ -1,5 +1,5 @@
-import Test from 'com/test.jsx';
+import D from 'com/winner/data';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-ReactDOM.render(<Test />, document.querySelector('.container'));
+ReactDOM.render(<D size={144} />, document.querySelector('.container'));

@@ -5,4 +5,13 @@ const playing = hocks => {
     player.on('connect', () => {
         hocks.connect();
     });
+    player.on('next', i => {
+        hocks.next(i);
+    });
+    const emitNextMove = i => {
+        player.emit('nextMove', i);
+    };
+    return emitNextMove;
 };
+
+export default playing;
