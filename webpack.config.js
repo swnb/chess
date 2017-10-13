@@ -6,7 +6,8 @@ module.exports = {
     entry: {
         index: path.join(__dirname, 'app', 'index'),
         // markdown: path.join(__dirname, 'app', 'markdown')
-        room: path.join(__dirname, 'app', 'room')
+        room: path.join(__dirname, 'app', 'room'),
+        test: path.join(__dirname, 'app', 'test')
     },
     output: {
         filename: '[name].js',
