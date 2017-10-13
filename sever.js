@@ -3,7 +3,7 @@ const util = require('util');
 const path = require('path');
 
 const config = require(__dirname + '/config');
-const websocket = require(__dirname + '/controllers/websocker/websocket');
+const websocket = require(__dirname + '/controllers/websocket/websocket');
 
 const Koa = require('koa');
 const static = require('koa-static');
