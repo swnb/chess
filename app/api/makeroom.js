@@ -14,8 +14,8 @@ const makeRoom = (roomId, size, winCount, hocks) => {
         socket.on('disconnect', () => {
             alert('服务器出错了');
         });
-        socket.on('into room', url => {
-            // hocks.redirect(url);
+        socket.on('into room', data => {
+            hocks.intoRoom(data);
         });
     });
 };

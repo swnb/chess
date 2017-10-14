@@ -7,7 +7,9 @@ const chooseRoom = (roomId, hocks) => {
     socket.on('err room', () => {
         hocks.err();
     });
-    socket.on('into room', () => {});
+    socket.on('into room', data => {
+        hocks.intoRoom(data);
+    });
 };
 
 export default chooseRoom;

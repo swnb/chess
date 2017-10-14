@@ -6,6 +6,9 @@ const maxRoom = require(configPath).maxRoom;
 
 const makeRoom = (io, updateRoomList) => {
     const makeroom = io.of('/makeroom').on('connection', socket => {
+        const intoRoom = data => {
+            socket.emit('into room', data);
+        };
         socket.on('make room', (roomId, size, winCount) => {
             //去空格
             roomId = roomId.trim();
@@ -21,7 +24,8 @@ const makeRoom = (io, updateRoomList) => {
                 //如果都满足,那么就添加
                 global.emptyRoomList.push({
                     module: { size, winCount },
-                    id: roomId
+                    id: roomId,
+                    intoRoom
                 });
                 console.log(`room ${roomId} 生成`);
                 console.log(`所有房间 ${global.id}`);

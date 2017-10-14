@@ -1,4 +1,5 @@
 const socketIo = require('socket.io');
+const uuidv4 = require('uuid/v4');
 const path = require('path');
 
 const chooseRoom = require(path.join(__dirname, './namespace/chooseroom'));
@@ -20,9 +21,12 @@ global.emptyRoomList.push = function(arg) {
 };
 global.emptyRoomList.remove = function(arg) {
     const index = global.id.indexOf(arg);
-    global.emptyRoomList.splice(index, 1);
     global.id.splice(index, 1);
+    const info = global.emptyRoomList.splice(index, 1);
+    return info;
 };
+
+global.NAMESPACE = uuidv4();
 
 console.log('room list 生成');
 

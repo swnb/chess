@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 
-const playing = hocks => {
-    const player = io('/playing');
+const playing = (roomId, hocks) => {
+    const player = io(`/${roomId}`);
     player.on('connect', () => {
         hocks.connect();
     });

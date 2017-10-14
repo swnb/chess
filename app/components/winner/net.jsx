@@ -20,24 +20,25 @@ function getArrayPosition(size) {
     return arr;
 }
 
-class D extends React.Component {
+class NetCheckerBorder extends React.Component {
     constructor(props) {
         super(props);
+
+        const [size, winCount, myturn, checkerType, otherCheckerType] = [
+            Math.pow(Number(this.props.size), 2),
+            Number(this.props.winCount),
+            this.props.myturn,
+            this.props.checkerType,
+            this.props.otherCheckerType
+        ];
+        this.size = size;
+        this.myturn = myturn;
+        this.win_count = winCount;
         this.ArrayP = getArrayPosition(size);
 
-        const size = Number(this.props.size);
-        this.size = size;
-        // this.win_count = Number(this.props.winCount);
-        this.win_count = Number(this.props.winCount);
-        // const myturn = this.props.myturn;
-        // const other = this.props.o;
-        // const my = this.props.m;
-        this.myturn = false;
-
         this.state = {
-            checkerType: 'X',
-            otherCheckerType: 'O',
-
+            checkerType,
+            otherCheckerType,
             boxArray: Array(size).fill(null)
         };
 
@@ -65,12 +66,14 @@ class D extends React.Component {
     }
     getWinner(array, i) {
         const flag = win(array, this.ArrayP, i, this.win_count);
+        console.log(flag);
         if (flag) {
             this.win();
             return flag;
         }
     }
     win() {
+        const size = this.size;
         // store.dispatch(getAction([...Array_tmp]));
         this.setStata({
             boxArray: Array(size).fill(null)
@@ -97,7 +100,8 @@ class D extends React.Component {
         }
     }
     componentDidMount() {
-        this.nextMove = playing(this.hocks);
+        //挂钩子
+        this.nextMove = playing(this.props.roomId, this.hocks);
     }
     render() {
         const arr_tmp = [...this.state.boxArray].map((e, i) => (
@@ -107,19 +111,16 @@ class D extends React.Component {
                 onClick={() => this.buttonClick(i)}
             />
         ));
-        // const state = () => {
-        //     if (this.state.next === 'over') {
-        //         return '赢的人是 ' + this.winner;
-        //     }
-        //     return this.state.next ? '下一个棋子是:X' : '下一个棋子是:O';
-        // };
+        const state = () => {
+            return this.state.info ? '下一个棋子是:X' : '下一个棋子是:O';
+        };
         return (
             <div>
-                {/* <div className="title">{state()}</div> */}
+                {<div className="title">{state()}</div>}
                 <Checkerboard size={Math.sqrt(this.size)} arrP={arr_tmp} />
             </div>
         );
     }
 }
 // export default { Data, store };
-export default D;
+export default NetCheckerBorder;

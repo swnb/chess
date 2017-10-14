@@ -1,6 +1,7 @@
 import makeRoom from 'api/makeroom';
 import HistoryList from 'base/historylist';
 import { Checkerplayer, store } from 'com/winner/getwinner';
+import NetCheckerBoarder from 'com/winner/net';
 import React from 'react';
 
 class InitPage extends React.Component {
@@ -10,13 +11,10 @@ class InitPage extends React.Component {
             render: false,
             size: 0,
             winCount: 5,
-            arrP: []
+            arrP: [],
+            netChecker: false
         };
         this.initGame = this.initGame.bind(this);
-    }
-    redirect(url) {
-        location.href = url;
-        window.reload();
     }
     initGame() {
         if (
@@ -45,8 +43,11 @@ class InitPage extends React.Component {
                     err() {
                         alert('请更新一下房间名看看吧');
                     },
-                    redirect: url => {
-                        this.redirect(url);
+                    intoRoom: data => {
+                        this.data = data;
+                        this.setState({
+                            netChecker: true
+                        });
                     }
                 };
 
@@ -90,6 +91,20 @@ class InitPage extends React.Component {
                 </fieldset>
             );
         } else {
+            if (this.state.netChecker) {
+                const { size, winCount, roomId, room_uuid, side } = this.data;
+                console.log(size, winCount, roomId, room_uuid, side);
+                return (
+                    <NetCheckerBoarder
+                        size={size}
+                        winCount={winCount}
+                        myturn={side === 'X'}
+                        checkerType={side}
+                        otherCheckerType={side === 'X' ? 'O' : 'X'}
+                        roomId={room_uuid}
+                    />
+                );
+            }
             return (
                 <div>
                     <Checkerplayer
