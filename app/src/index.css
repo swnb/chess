@@ -33,8 +33,3 @@ h1 {
     flex-wrap: wrap;
     justify-content: space-around;
 }
-
-.history {
-    margin-top: 10px;
-    transform: scale(0.5);
-}

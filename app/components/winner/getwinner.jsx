@@ -11,6 +11,7 @@ class Checkerplayer extends React.Component {
         super(props);
         const size = Number(this.props.size);
         this.state = {
+            render: false,
             next: true,
             boxArray: Array(size).fill(null)
         };

@@ -5,12 +5,14 @@ const resolve = path.resolve;
 module.exports = {
     entry: {
         index: path.join(__dirname, 'app', 'index'),
-        markdown: path.join(__dirname, 'app', 'markdown')
-        // test: path.join(__dirname, 'app', 'template', 'docker')
+        // markdown: path.join(__dirname, 'app', 'markdown')
+        room: path.join(__dirname, 'app', 'room'),
+        test: path.join(__dirname, 'app', 'test')
     },
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: ''
     },
     module: {
         rules: [
@@ -41,7 +43,8 @@ module.exports = {
             base: resolve('./app/components/base'),
             src: resolve('./app/src'),
             util: resolve('./app/util'),
-            store: resolve('./app/redux')
+            store: resolve('./app/redux'),
+            api: resolve('./app/api')
         }
     },
     devtool: 'source-map',

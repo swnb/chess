@@ -7,7 +7,9 @@
     "author": "swnb <1786718956@qq.com>",
     "license": "MIT",
     "scripts": {
-        "dev": "webpack-dev-server --open"
+        "dev": "webpack-dev-server --open",
+        "built": "webpack",
+        "server": "node index.js"
     },
     "dependencies": {
         "babel": "^6.23.0",
@@ -18,12 +20,18 @@
         "babel-preset-react": "^6.24.1",
         "css-loader": "^0.28.7",
         "html-webpack-plugin": "^2.30.1",
+        "koa": "^2.3.0",
+        "koa-router": "^7.2.1",
+        "koa-static": "^4.0.1",
         "react": "^16.0.0",
         "react-dom": "^16.0.0",
         "redux": "^3.7.2",
         "remarkable": "^1.7.1",
+        "socket.io": "^2.0.3",
+        "socket.io-client": "^2.0.3",
         "style-loader": "^0.18.2",
         "swnb-webpack-learning-plugin": "^1.2.6",
+        "uuid": "^3.1.0",
         "webpack": "^3.6.0",
         "webpack-dev-server": "^2.9.1"
     }
