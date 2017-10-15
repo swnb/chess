@@ -1,7 +1,7 @@
 import makeRoom from 'api/makeroom';
 import HistoryList from 'base/historylist';
-import { Checkerplayer, store } from 'com/winner/getwinner';
-import NetCheckerBoarder from 'com/winner/net';
+import { Checkerplayer } from 'com/winner/getwinner';
+import { NetCheckerBoarder, store } from 'com/winner/net';
 import React from 'react';
 
 class InitPage extends React.Component {
@@ -93,16 +93,21 @@ class InitPage extends React.Component {
         } else {
             if (this.state.netChecker) {
                 const { size, winCount, roomId, room_uuid, side } = this.data;
-                console.log(size, winCount, roomId, room_uuid, side);
                 return (
-                    <NetCheckerBoarder
-                        size={size}
-                        winCount={winCount}
-                        myturn={side === 'X'}
-                        checkerType={side}
-                        otherCheckerType={side === 'X' ? 'O' : 'X'}
-                        roomId={room_uuid}
-                    />
+                    <div>
+                        <NetCheckerBoarder
+                            size={size}
+                            winCount={winCount}
+                            myturn={side === 'X'}
+                            checkerType={side}
+                            otherCheckerType={side === 'X' ? 'O' : 'X'}
+                            roomId={room_uuid}
+                        />
+                        <HistoryList
+                            size={this.state.size}
+                            pos={this.state.arrP}
+                        />
+                    </div>
                 );
             }
             return (

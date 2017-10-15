@@ -4,9 +4,8 @@ import playing from 'api/playing';
 import Checkerboard from 'base/checkerboard';
 import Clickbutton from 'base/clickbutton';
 import React from 'react';
+import { getAction, store } from 'store/store';
 import win from 'util/win/ifwin';
-
-// import { getAction, store } from 'store/store';
 
 //生成点阵
 function getArrayPosition(size) {
@@ -20,7 +19,7 @@ function getArrayPosition(size) {
     return arr;
 }
 
-class NetCheckerBorder extends React.Component {
+class NetCheckerBoarder extends React.Component {
     constructor(props) {
         super(props);
 
@@ -66,16 +65,15 @@ class NetCheckerBorder extends React.Component {
     }
     getWinner(array, i) {
         const flag = win(array, this.ArrayP, i, this.win_count);
-        console.log(flag);
         if (flag) {
-            this.win();
+            this.win(array);
             return flag;
         }
     }
-    win() {
+    win(array) {
         const size = this.size;
-        // store.dispatch(getAction([...Array_tmp]));
-        this.setStata({
+        store.dispatch(getAction([...array]));
+        this.setState({
             boxArray: Array(size).fill(null)
         });
     }
@@ -122,5 +120,5 @@ class NetCheckerBorder extends React.Component {
         );
     }
 }
-// export default { Data, store };
-export default NetCheckerBorder;
+
+export { NetCheckerBoarder, store };
