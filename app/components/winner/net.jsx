@@ -23,6 +23,9 @@ class NetCheckerBoarder extends React.Component {
     constructor(props) {
         super(props);
 
+        //生成点阵
+        this.ArrayP = getArrayPosition(size);
+
         const [size, winCount, myturn, checkerType, otherCheckerType] = [
             Math.pow(Number(this.props.size), 2),
             Number(this.props.winCount),
@@ -33,9 +36,9 @@ class NetCheckerBoarder extends React.Component {
         this.size = size;
         this.myturn = myturn;
         this.win_count = winCount;
-        this.ArrayP = getArrayPosition(size);
 
         this.state = {
+            info: `X 先下,你是 ${checkerType} `,
             checkerType,
             otherCheckerType,
             boxArray: Array(size).fill(null)
@@ -48,12 +51,15 @@ class NetCheckerBoarder extends React.Component {
             },
             next: i => {
                 //被动更新自己的棋盘
-
                 let Array_tmp = [...this.state.boxArray];
                 Array_tmp[i] = this.state.otherCheckerType;
                 const flag = this.getWinner(Array_tmp, i);
                 if (!flag) {
                     this.myturn = true;
+                    const info = `该你下棋了 ${this.state.checkerType}`;
+                    this.setState({
+                        info
+                    });
                     this.setState({ boxArray: Array_tmp });
                 }
             }
@@ -66,21 +72,29 @@ class NetCheckerBoarder extends React.Component {
     getWinner(array, i) {
         const flag = win(array, this.ArrayP, i, this.win_count);
         if (flag) {
-            this.win(array);
+            this.win(array, i);
             return flag;
         }
     }
-    win(array) {
+    win(array, i) {
         const size = this.size;
         store.dispatch(getAction([...array]));
+        const info = `赢得人是${array[i]}`;
         this.setState({
             boxArray: Array(size).fill(null)
+        });
+        this.setState({
+            info
         });
     }
     lose() {}
     dispatch(i) {
         //你不可以下棋了
         this.myturn = false;
+        const info = `该对方下棋了 ${this.state.otherCheckerType}`;
+        this.setState({
+            info
+        });
         //发布信息更新对方的棋盘
         this.nextMove(i);
         //更新自己的棋盘
@@ -109,12 +123,9 @@ class NetCheckerBoarder extends React.Component {
                 onClick={() => this.buttonClick(i)}
             />
         ));
-        const state = () => {
-            return this.state.info ? '下一个棋子是:X' : '下一个棋子是:O';
-        };
         return (
             <div>
-                {<div className="title">{state()}</div>}
+                {<div className="title">{this.state.info}</div>}
                 <Checkerboard size={Math.sqrt(this.size)} arrP={arr_tmp} />
             </div>
         );

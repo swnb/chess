@@ -1,7 +1,7 @@
 import makeRoom from 'api/makeroom';
 import HistoryList from 'base/historylist';
-import { Checkerplayer } from 'com/winner/getwinner';
 import { NetCheckerBoarder, store } from 'com/winner/net';
+import { Checkerplayer } from 'com/winner/sigel';
 import React from 'react';
 
 class InitPage extends React.Component {
