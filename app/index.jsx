@@ -1,8 +1,9 @@
 import chooseRoom from 'api/chooseroom';
 import roomlist from 'api/roomlist';
+import HistoryList from 'base/historylist';
 import RoomPage from 'base/roompage';
 import InitPage from 'com/init-checkboard/initplayer';
-import { NetCheckerBoarder } from 'com/winner/net';
+import { NetCheckerBoarder, store } from 'com/winner/net';
 import React from 'react';
 import ReactDom from 'react-dom';
 
@@ -13,7 +14,8 @@ class Index extends React.Component {
             createRoom: false,
             rooms: [],
             intoRoom: false,
-            data: {}
+            data: {},
+            arrP: []
         };
         this.createRoom = this.createRoom.bind(this);
         this.getIntoRoom = this.getIntoRoom.bind(this);
@@ -44,6 +46,26 @@ class Index extends React.Component {
         });
     }
     componentDidMount() {
+        store.subscribe(() => {
+            const arrP = store.getState();
+            if (Array.isArray(arrP)) {
+                this.setState({ arrP });
+            } else if (arrP) {
+                this.setState(preState => {
+                    if (preState.intoRoom && preState.createRoom) {
+                        return {
+                            intoRoom: true,
+                            createRoom: true
+                        };
+                    } else {
+                        return preState.intoRoom
+                            ? { intoRoom: false }
+                            : { createRoom: false };
+                    }
+                });
+            }
+        });
+
         //钩子
         const hocks = {
             setList: mes => {
@@ -55,20 +77,21 @@ class Index extends React.Component {
     render() {
         if (this.state.intoRoom) {
             const { size, winCount, roomId, room_uuid, side } = this.state.data;
-            console.log(size, winCount, roomId, room_uuid, side);
             return (
-                <NetCheckerBoarder
-                    size={size}
-                    winCount={winCount}
-                    myturn={side === 'X'}
-                    checkerType={side}
-                    otherCheckerType={side === 'X' ? 'O' : 'X'}
-                    roomId={room_uuid}
-                />
-                // <HistoryList
-                // size={this.state.size}
-                // pos={this.state.arrP}
-            // />
+                <div>
+                    <NetCheckerBoarder
+                        size={size}
+                        winCount={winCount}
+                        myturn={side === 'X'}
+                        checkerType={side}
+                        otherCheckerType={side === 'X' ? 'O' : 'X'}
+                        roomId={room_uuid}
+                    />
+                    <HistoryList
+                        size={Math.pow(size, 2)}
+                        pos={this.state.arrP}
+                    />
+                </div>
             );
         }
         if (this.state.createRoom) {

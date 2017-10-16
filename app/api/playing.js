@@ -8,10 +8,16 @@ const playing = (roomId, hocks) => {
     player.on('next', i => {
         hocks.next(i);
     });
+    player.on('room distory', () => {
+        hocks.destory();
+    });
     const emitNextMove = i => {
         player.emit('nextMove', i);
     };
-    return emitNextMove;
+    const exitRoom = () => {
+        player.emit('exit');
+    };
+    return { emitNextMove, exitRoom };
 };
 
 export default playing;

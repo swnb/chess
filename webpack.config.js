@@ -4,10 +4,8 @@ const html_templat_path = path.resolve('./template/template.html');
 const resolve = path.resolve;
 module.exports = {
     entry: {
-        index: path.join(__dirname, 'app', 'index'),
+        index: path.join(__dirname, 'app', 'index')
         // markdown: path.join(__dirname, 'app', 'markdown')
-        room: path.join(__dirname, 'app', 'room'),
-        test: path.join(__dirname, 'app', 'test')
     },
     output: {
         filename: '[name].js',
@@ -41,7 +39,7 @@ module.exports = {
         alias: {
             com: resolve('./app/components'),
             base: resolve('./app/components/base'),
-            src: resolve('./app/src'),
+            src: resolve('./app/src/css'),
             util: resolve('./app/util'),
             store: resolve('./app/redux'),
             api: resolve('./app/api')
