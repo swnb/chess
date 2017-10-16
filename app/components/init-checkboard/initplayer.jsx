@@ -50,7 +50,6 @@ class InitPage extends React.Component {
                         });
                     }
                 };
-
                 makeRoom(roomid, size, winCount, hocks);
             }
         } else {

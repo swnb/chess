@@ -3,7 +3,6 @@ const uuidv4 = require('uuid/v4');
 const path = require('path');
 
 const chooseRoom = require(path.join(__dirname, './namespace/chooseroom'));
-const playing = require(path.join(__dirname, './namespace/playing'));
 const roomList = require(path.join(__dirname, './namespace/roomlist'));
 const makeRoom = require(path.join(__dirname, './namespace/makeroom'));
 
@@ -37,7 +36,6 @@ const main = httpServer => {
     const io = socketIo(httpServer);
     const updateRoomList = roomList(io);
     chooseRoom(io, updateRoomList);
-    playing(io);
     makeRoom(io, updateRoomList);
 };
 

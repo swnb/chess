@@ -40,19 +40,11 @@ class NetCheckerBoarder extends React.Component {
             info: `X 先下,你是 ${checkerType} `,
             checkerType,
             otherCheckerType,
+            myWinNumber: 0,
+            otherWinNumber: 0,
+            myturn,
             newPoint: undefined,
             boxArray: Array(size).fill(null)
-        };
-
-        //钩子函数,接受信息的时候
-        this.hocks = {
-            connect() {
-                console.log('connect');
-            },
-            next: i => {
-                //被动更新自己的棋盘
-                this.buttonClick(i, 'nextMove');
-            }
         };
 
         this.buttonClick = this.buttonClick.bind(this);
@@ -72,11 +64,20 @@ class NetCheckerBoarder extends React.Component {
         const winnerInfo =
             array[i] === this.state.checkerType ? '你赢了,恭喜啊!' : '对面...赢了';
         const info = `${winnerInfo}`;
-        this.setState({
-            boxArray: Array(size).fill(null)
-        });
-        this.setState({
-            info
+        this.setState(preState => {
+            const [myWinNumber, otherWinNumber] =
+                array[i] === this.state.checkerType
+                    ? [preState.myWinNumber + 1, preState.otherWinNumber]
+                    : [preState.myWinNumber, preState.otherWinNumber + 1];
+            return {
+                info,
+                myWinNumber,
+                otherWinNumber,
+                boxArray: Array(size).fill(null),
+                checkerType: preState.otherCheckerType,
+                otherCheckerType: preState.checkerType,
+                myturn: !preState.myturn
+            };
         });
     }
     lose() {}
@@ -114,19 +115,53 @@ class NetCheckerBoarder extends React.Component {
     }
     buttonClick(i, token = null) {
         if (this.myturn || token === 'nextMove') {
-            this.setState({ newPoint: i });
-            //发布点击信息
-            this.dispatch(i);
+            if (!this.state.boxArray[i]) {
+                this.setState({ newPoint: i });
+                //发布点击信息
+                this.dispatch(i);
+            }
         }
     }
+    destoryRoom() {
+        store.dispatch({ type: 'DESTORY' });
+    }
     componentDidMount() {
+        //钩子函数,接受信息的时候
+        const hocks = {
+            connect() {
+                console.log('connect');
+            },
+            next: i => {
+                //被动更新自己的棋盘
+                this.buttonClick(i, 'nextMove');
+            },
+            destory: () => {
+                this.destoryRoom();
+            }
+        };
         //挂钩子
-        this.nextMove = playing(this.props.roomId, this.hocks);
+        const { emitNextMove, exitRoom } = playing(this.props.roomId, hocks);
+        this.nextMove = emitNextMove;
+        this.exitRoom = () => {
+            exitRoom();
+            store.dispatch({ type: 'DESTORY' });
+        };
+        this.clearNewPoint = setTimeout(() => {
+            console.log('开始了');
+        });
     }
     render() {
         const arr_tmp = [...this.state.boxArray].map((e, i) => {
+            const newPoint = i === this.state.newPoint;
+            if (newPoint) {
+                clearTimeout(this.clearNewPoint);
+                this.clearNewPoint = setTimeout(() => {
+                    this.setState.newPoint = undefined;
+                }, 1000);
+            }
             return (
                 <Clickbutton
+                    newPoint={newPoint}
                     key={i}
                     value={e}
                     onClick={() => {
@@ -137,8 +172,15 @@ class NetCheckerBoarder extends React.Component {
         });
         return (
             <div>
+                <div className="winCount">
+                    <div>你赢的数目是 {`${this.state.myWinNumber}`}</div>
+                    <div>对面赢的数目是 {`${this.state.otherWinNumber}`}</div>
+                </div>
                 {<div className="title">{this.state.info}</div>}
                 <Checkerboard size={Math.sqrt(this.size)} arrP={arr_tmp} />
+                <button className="exitButton" onClick={this.exitRoom}>
+                    exitRoom
+                </button>
             </div>
         );
     }

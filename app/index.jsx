@@ -48,7 +48,22 @@ class Index extends React.Component {
     componentDidMount() {
         store.subscribe(() => {
             const arrP = store.getState();
-            this.setState({ arrP });
+            if (Array.isArray(arrP)) {
+                this.setState({ arrP });
+            } else if (arrP) {
+                this.setState(preState => {
+                    if (preState.intoRoom && preState.createRoom) {
+                        return {
+                            intoRoom: true,
+                            createRoom: true
+                        };
+                    } else {
+                        return preState.intoRoom
+                            ? { intoRoom: false }
+                            : { createRoom: false };
+                    }
+                });
+            }
         });
 
         //钩子
