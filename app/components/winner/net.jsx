@@ -1,3 +1,4 @@
+import 'src/checker.css';
 import 'src/index.css';
 
 import playing from 'api/playing';
@@ -61,14 +62,20 @@ class NetCheckerBoarder extends React.Component {
     win(array, i) {
         const size = this.size;
         store.dispatch(getAction([...array]));
+        const nextMover = this.state.myturn ? '下一步是对面先下棋' : '下一步是你先下';
         const winnerInfo =
-            array[i] === this.state.checkerType ? '你赢了,恭喜啊!' : '对面...赢了';
-        const info = `${winnerInfo}`;
+            array[i] === this.state.checkerType
+                ? `你赢了,恭喜啊! ${nextMover}`
+                : `对面...赢了 ${nextMover}`;
+        const info = `${winnerInfo} `;
+        console.log(this.state.myturn);
         this.setState(preState => {
             const [myWinNumber, otherWinNumber] =
                 array[i] === this.state.checkerType
                     ? [preState.myWinNumber + 1, preState.otherWinNumber]
                     : [preState.myWinNumber, preState.otherWinNumber + 1];
+            //作为转变的是之前哦myturn;
+            this.myturn = !preState.myturn;
             return {
                 info,
                 myWinNumber,
@@ -156,7 +163,9 @@ class NetCheckerBoarder extends React.Component {
             if (newPoint) {
                 clearTimeout(this.clearNewPoint);
                 this.clearNewPoint = setTimeout(() => {
-                    this.setState.newPoint = undefined;
+                    this.setState({
+                        newPoint: undefined
+                    });
                 }, 1000);
             }
             return (
@@ -179,7 +188,7 @@ class NetCheckerBoarder extends React.Component {
                 {<div className="title">{this.state.info}</div>}
                 <Checkerboard size={Math.sqrt(this.size)} arrP={arr_tmp} />
                 <button className="exitButton" onClick={this.exitRoom}>
-                    exitRoom
+                    认输/退出房间
                 </button>
             </div>
         );

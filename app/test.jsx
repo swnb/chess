@@ -1,5 +1,5 @@
-import Test from 'com/test';
+import Count from 'com/count/count';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-ReactDOM.render(<Test />, document.querySelector('.container'));
+ReactDOM.render(<Count start={true} />, document.querySelector('.container'));

@@ -77,7 +77,6 @@ class Index extends React.Component {
     render() {
         if (this.state.intoRoom) {
             const { size, winCount, roomId, room_uuid, side } = this.state.data;
-            console.log(size, winCount, roomId, room_uuid, side);
             return (
                 <div>
                     <NetCheckerBoarder
