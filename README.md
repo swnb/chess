@@ -15,28 +15,49 @@ this is  a personal project for react
 
 **目前的**效果图
 
-![](./picture/pic2.png)
-![](./picture/pic.png)
 ![](./picture/pic1.png)
-
-```shell
-    git clone -b second-day https://github.com/swnb/react-project.git
-
-    cd react-project
-
-    yarn 
-
-    yarn run dev 
-```
-
-如果浏览器没有打开的话,直接进入路由 [/index.html](http://localhost:8080/index.html)
-
+![](./picture/pic2.png)
+![](./picture/pic3.png)
+![](./picture/pic4.png)
+![](./picture/pic5.png)
+![](./picture/pic6.png)
 
 第三天代做的事情
 * 将它改造成为`websocket`
 * 添加颜色,优化代码,历史记录用红线连接起来..
 * ~~重构代码,逻辑组件和ui组件分离~~ (完成) 
 
+最后两天的开发工作也差不多完成了,因为本人没有服务器,就不提供测试地址了
+
+完成的功能
+* 通过socket.io,成功将项目改成了`websocket`
+* 创建房间房间,生成游戏房间
+* 自定义规则和期盼大小
+* 进入房间计算输赢次数
+* 根据每次结果生成历史记录
+* 毁灭房间功能
+* 房间`namespace`加密
+
+你只需要
+```
+git clone https://github.com/swnb/react-project.git
+
+cd react-project
+
+yarn 
+
+webpack 
+
+node index.js
+```
+
+
+
+就可以成功在[8080端口](http://localhost:8080)查看..之后创建房间,让你的兄弟进入房间,你们开始比赛...
+
+后面加入`ui美化`,开心...
+
+我之后会开一个专题谈谈这个项目的心得
 
 `gh-page`的测试的[地址在这里](https://swnb.github.io/react-project/views/second.html)
 

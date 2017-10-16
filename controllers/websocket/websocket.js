@@ -7,8 +7,8 @@ const roomList = require(path.join(__dirname, './namespace/roomlist'));
 const makeRoom = require(path.join(__dirname, './namespace/makeroom'));
 
 global.emptyRoomList = [
-    { module: { size: 12, winCount: 6 }, id: 'who' },
-    { module: { size: 13, winCount: 5 }, id: 'who' }
+    // { module: { size: 12, winCount: 6 }, id: 'who' },
+    // { module: { size: 13, winCount: 5 }, id: 'who' }
 ];
 
 global.playingRoomList = [];
