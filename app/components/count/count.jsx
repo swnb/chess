@@ -1,8 +1,11 @@
 import React from 'react';
 
-class counter extends React.Component {
+class Counter extends React.Component {
     constructor(props) {
         super(props);
+        // const largeNum = this.props.largeNum;
+        //const counting=this.props.counting
+        // const timeOut=this.props.timeOut
         this.state = {
             count: 0
         };
@@ -18,13 +21,37 @@ class counter extends React.Component {
         this.timeId && clearInterval(this.timeId);
         this.setState({ count: 0 });
     }
-    render() {
-        if (this.props.start) {
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.counting) {
+            this.clear();
             this.count();
-        }
-        if (this.props.stop) {
+        } else {
             this.clear();
         }
-        return <div>{this.state.count}</div>;
+    }
+    render() {
+        let color = undefined;
+        if (this.state.count >= this.props.largeNum) {
+            this.clear();
+            this.props.timeOut();
+        } else if (this.state.count > this.props.largeNum * 2 / 3) {
+            color = 'red';
+        } else if (
+            this.state.count > this.props.largeNum / 3 &&
+            this.state.count <= this.props.largeNum * 2 / 3
+        ) {
+            color = 'orange';
+        } else if (this.state.count <= this.props.largeNum / 3) {
+            color = 'blue';
+        }
+        return (
+            <div className="counter">
+                请在限定时间内完成你的下一步<span style={{ color: color }}>
+                    {30 - this.state.count}
+                </span>
+            </div>
+        );
     }
 }
+
+export default Counter;

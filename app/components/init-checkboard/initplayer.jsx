@@ -17,14 +17,10 @@ class InitPage extends React.Component {
         this.initGame = this.initGame.bind(this);
     }
     initGame() {
-        if (
-            this.refs.size.value &&
-            this.refs.winCount.value &&
-            this.refs.roomid.value
-        ) {
+        if (this.refs.size.value && this.refs.roomid.value) {
             const [size, winCount, roomid] = [
                 parseInt(this.refs.size.value),
-                parseInt(this.refs.winCount.value),
+                parseInt(this.refs.winCount.value || 5),
                 this.refs.roomid.value
             ];
             if (isNaN(size) || isNaN(winCount)) {
@@ -60,7 +56,9 @@ class InitPage extends React.Component {
         //相应状态
         store.subscribe(() => {
             const arrP = store.getState();
-            this.setState({ arrP });
+            if (Array.isArray(arrP)) {
+                this.setState({ arrP });
+            }
         });
     }
     render() {

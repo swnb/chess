@@ -4,6 +4,8 @@ import 'src/index.css';
 import playing from 'api/playing';
 import Checkerboard from 'base/checkerboard';
 import Clickbutton from 'base/clickbutton';
+import Info from 'base/info';
+import Count from 'com/count/count';
 import React from 'react';
 import { getAction, store } from 'store/store';
 import win from 'util/win/ifwin';
@@ -44,12 +46,14 @@ class NetCheckerBoarder extends React.Component {
             myWinNumber: 0,
             otherWinNumber: 0,
             myturn,
+            counting: false,
             newPoint: undefined,
             boxArray: Array(size).fill(null)
         };
 
         this.buttonClick = this.buttonClick.bind(this);
         this.dispatch = this.dispatch.bind(this);
+        this.timeOut = this.timeOut.bind(this);
         this.win = this.win.bind(this);
     }
     getWinner(array, i) {
@@ -61,14 +65,14 @@ class NetCheckerBoarder extends React.Component {
     }
     win(array, i) {
         const size = this.size;
+        this.setState({ counting: false });
         store.dispatch(getAction([...array]));
         const nextMover = this.state.myturn ? '下一步是对面先下棋' : '下一步是你先下';
         const winnerInfo =
             array[i] === this.state.checkerType
                 ? `你赢了,恭喜啊! ${nextMover}`
                 : `对面...赢了 ${nextMover}`;
-        const info = `${winnerInfo} `;
-        console.log(this.state.myturn);
+        const info = `${winnerInfo}`;
         this.setState(preState => {
             const [myWinNumber, otherWinNumber] =
                 array[i] === this.state.checkerType
@@ -87,12 +91,14 @@ class NetCheckerBoarder extends React.Component {
             };
         });
     }
-    lose() {}
     dispatch(i) {
         //判断
         if (this.myturn) {
             //你不可以下棋了
             this.myturn = false;
+            this.setState({
+                counting: true
+            });
             const info = `该对方下棋了 ${this.state.otherCheckerType}`;
             this.setState({
                 info
@@ -112,6 +118,9 @@ class NetCheckerBoarder extends React.Component {
             const flag = this.getWinner(Array_tmp, i);
             if (!flag) {
                 this.myturn = true;
+                this.setState({
+                    counting: true
+                });
                 const info = `该你下棋了 ${this.state.checkerType}`;
                 this.setState({
                     info
@@ -131,6 +140,13 @@ class NetCheckerBoarder extends React.Component {
     }
     destoryRoom() {
         store.dispatch({ type: 'DESTORY' });
+    }
+    timeOut() {
+        if (this.state.myturn) {
+            alert('你长时间没择棋子,请点击确定,不然将你移除房间!');
+        } else {
+            alert('对面超时了,很抱歉,正在进一步协商');
+        }
     }
     componentDidMount() {
         //钩子函数,接受信息的时候
@@ -185,7 +201,12 @@ class NetCheckerBoarder extends React.Component {
                     <div>你赢的数目是 {`${this.state.myWinNumber}`}</div>
                     <div>对面赢的数目是 {`${this.state.otherWinNumber}`}</div>
                 </div>
-                {<div className="title">{this.state.info}</div>}
+                <Info info={this.state.info} />
+                <Count
+                    largeNum={30}
+                    counting={this.state.counting}
+                    timeOut={this.timeOut}
+                />
                 <Checkerboard size={Math.sqrt(this.size)} arrP={arr_tmp} />
                 <button className="exitButton" onClick={this.exitRoom}>
                     认输/退出房间

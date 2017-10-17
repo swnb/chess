@@ -6,56 +6,49 @@ h1 {
 .title {
     position: relative;
     margin: 15px auto;
-    color: rgb(64, 163, 114);
+    width: 300px;
+    height: 30px;
+    color: rgb(64, 69, 163);
     text-align: center;
-    /* font-size: 20px;
-    font-family: serif;
-    transform-origin: 50%;
+    font-size: 15px;
+    transition: all 1.5s ease-in-out;
 
-    perspective: 2000px;
-    transform-style: preserve-3d; */
+    transform-style: preserve-3d;
 }
 
-/* .title>span {
+.title>div {
     position: absolute;
-    display: block;
-    width: 40px;
-    background-color: yellow;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 300px;
+    height: 30px;
+    border: 1px solid rgba(27, 181, 228, 0.815);
+    border-radius: 10px;
+    color: rgb(0, 0, 0);
     text-align: center;
 
     backface-visibility: hidden;
 }
 
 .title .front {
-    transform: translateZ(20px);
+    background: linear-gradient(249deg, #0077ff, #00f9ff);
+    transform: translateZ(86px);
 }
 
 .title .left {
-    transform: rotateY(90deg) translateZ(20px);
-}
-
-.title .back {
-    transform: rotateY(180deg)translateZ(20px);
+    background: linear-gradient(249deg, #0077ff, #00f9ff);
+    transform: rotateY(120deg) translateZ(86px);
 }
 
 .title .right {
-    transform: rotateY(270deg) translateZ(20px);
-} */
-
-@keyframes ro {
-    0% {
-        transform: rotateY(0);
-    }
-    99.9% {
-        transform: rotateY(360deg);
-    }
-    100% {
-        transform: rotate(0);
-    }
-}
-
-.rotate {
-    animation: ro 1.5s ease-in-out;
+    background: linear-gradient(249deg, #0077ff, #00f9ff);
+    transform: rotateY(240deg) translateZ(86px);
 }
 
 .line {
