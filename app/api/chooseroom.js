@@ -1,14 +1,14 @@
 import io from 'socket.io-client';
 
 //{setRoomId err}
-const chooseRoom = (roomId, hocks) => {
+const chooseRoom = (roomId, hooks) => {
     const socket = io('/chooseroom');
     socket.emit('choose room', roomId);
     socket.on('err room', () => {
-        hocks.err();
+        hooks.err();
     });
     socket.on('into room', data => {
-        hocks.intoRoom(data);
+        hooks.intoRoom(data);
     });
 };
 

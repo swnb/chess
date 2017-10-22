@@ -6,7 +6,6 @@ function initSide() {
     } else {
         return ['O', 'X'];
     }
-    return ['X', 'O'];
 }
 
 const chooseRoom = (io, updateRoomList) => {
