@@ -1,0 +1,15 @@
+@import '~antd/dist/antd.css';
+#components-form-demo-validate-other .dropbox {
+    height: 200px;
+    line-height: 1.5;
+}
+
+.form {
+    margin: 60px auto 0;
+    width: 70%;
+}
+
+.ant-form-item-label label {
+    color: rgb(14, 117, 243);
+    font-size: 20px;
+}

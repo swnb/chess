@@ -12,6 +12,7 @@
         "server": "node index.js"
     },
     "dependencies": {
+        "antd": "^2.13.6",
         "babel": "^6.23.0",
         "babel-core": "^6.26.0",
         "babel-loader": "^7.1.2",

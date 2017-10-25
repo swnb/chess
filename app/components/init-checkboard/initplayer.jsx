@@ -4,6 +4,7 @@ import { NetCheckerBoarder, store } from 'com/winner/net';
 import { Checkerplayer } from 'com/winner/sigel';
 import React from 'react';
 
+// import {Form,Icon,Buttom} from 'antd'
 class InitPage extends React.Component {
     constructor(props) {
         super(props);

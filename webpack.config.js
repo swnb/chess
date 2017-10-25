@@ -4,8 +4,9 @@ const html_templat_path = path.resolve('./template/template.html');
 const resolve = path.resolve;
 module.exports = {
     entry: {
-        index: path.join(__dirname, 'app', 'index')
+        index: path.join(__dirname, 'app', 'index'),
         // markdown: path.join(__dirname, 'app', 'markdown')
+        test: resolve(__dirname, 'app', 'test')
     },
     output: {
         filename: '[name].js',
