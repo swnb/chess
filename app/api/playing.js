@@ -1,15 +1,15 @@
 import io from 'socket.io-client';
 
-const playing = (roomId, hocks) => {
+const playing = (roomId, hooks) => {
     const player = io(`/${roomId}`);
     player.on('connect', () => {
-        hocks.connect();
+        hooks.connect();
     });
     player.on('next', i => {
-        hocks.next(i);
+        hooks.next(i);
     });
     player.on('room distory', () => {
-        hocks.destory();
+        hooks.destory();
     });
     const emitNextMove = i => {
         player.emit('nextMove', i);
