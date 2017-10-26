@@ -6,6 +6,7 @@ import Checkerboard from 'base/checkerboard';
 import Clickbutton from 'base/clickbutton';
 import Info from 'base/info';
 import Count from 'com/count/count';
+import { message } from 'antd';
 import React from 'react';
 import { getAction, store } from 'store/store';
 import win from 'util/win/ifwin';
@@ -143,9 +144,9 @@ class NetCheckerBoarder extends React.Component {
     }
     timeOut() {
         if (this.state.myturn) {
-            alert('你长时间没择棋子,请点击确定,不然将你移除房间!');
+            message.info('你长时间没择棋子,请点击确定,不然将你移除房间!');
         } else {
-            alert('对面超时了,很抱歉,正在进一步协商');
+            message.info('对面超时了,很抱歉,正在进一步协商');
         }
     }
     componentDidMount() {
