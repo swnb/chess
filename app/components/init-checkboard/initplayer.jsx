@@ -21,7 +21,7 @@ class InitPage extends React.Component {
         const { roomId, passwd, size, winCount } = values;
         const hooks = {
             next: () => {
-                alert('你需要等到下一个人进入房间和你玩耍,在这之前,你可以熟悉规则');
+                message.info('你需要等到下一个人进入房间和你玩耍,在这之前,你可以熟悉规则');
                 console.log('room made');
                 this.setState({
                     size: Math.pow(size, 2),
@@ -39,7 +39,7 @@ class InitPage extends React.Component {
                 });
             }
         };
-        makeRoom(roomId, size, winCount, hooks);
+        makeRoom({ roomId, passwd, size, winCount }, hooks);
     }
     componentDidMount() {
         //相应状态

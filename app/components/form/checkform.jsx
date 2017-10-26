@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'src/form.css';
 import { Form, Input, Slider, Switch, Button } from 'antd';
-
 const FormItem = Form.Item;
 
 class CheckBoardForm extends React.Component {
@@ -23,8 +22,9 @@ class CheckBoardForm extends React.Component {
     }
     handleSubmit(e) {
         e.preventDefault();
-        const values = this.props.form.getFieldsValue();
-        this.props.initGame(values);
+        this.props.form.validateFields((err, values) => {
+            err ? void 0 : this.props.initGame(values);
+        });
     }
     render() {
         const { formLayout } = this.state;
@@ -38,27 +38,34 @@ class CheckBoardForm extends React.Component {
 
         return (
             <div className="form">
-                <Form onSubmit={this.handleSubmit} layout={formLayout}>
+                <Form
+                    onSubmit={this.handleSubmit}
+                    layout={formLayout}
+                    hideRequiredMark={true}
+                >
                     <FormItem {...formItemLayout} label="自定义棋盘房间名称">
                         {getFieldDecorator('roomId', {
                             rules: [
                                 {
                                     required: true,
+                                    whitespace: true,
+                                    transform: id => (id ? id.trim() : id),
                                     message: '输入你的房间名称,名称的最大长度是10',
-                                    transform: e => e.trim(),
                                     max: 10
                                 }
                             ]
                         })(<Input size="large" placeholder="房间名称" />)}
                     </FormItem>
 
+                    <Switch
+                        checkedChildren="开"
+                        unCheckedChildren="关"
+                        onChange={this.handlePasswdChange}
+                    />
                     <FormItem {...formItemLayout} label="是否需要密码呢?">
-                        <Switch
-                            checkedChildren="开"
-                            unCheckedChildren="关"
-                            onChange={this.handlePasswdChange}
-                        />
-                        {getFieldDecorator('passwd', { initialValue: null })(
+                        {getFieldDecorator('passwd', {
+                            initialValue: null
+                        })(
                             <Input
                                 size="large"
                                 placeholder="输入密码，可以不填写"
@@ -84,7 +91,7 @@ class CheckBoardForm extends React.Component {
                                     60: '60 X 60',
                                     100: {
                                         style: {
-                                            color: '#f50'
+                                            color: '#1886b2'
                                         },
                                         label: <strong>100 X 100</strong>
                                     }
@@ -108,7 +115,7 @@ class CheckBoardForm extends React.Component {
                                     10: '10子棋',
                                     20: {
                                         style: {
-                                            color: '#f50'
+                                            color: '#1886b2'
                                         },
                                         label: <strong>20子棋</strong>
                                     }
@@ -117,7 +124,7 @@ class CheckBoardForm extends React.Component {
                         )}
                     </FormItem>
 
-                    <FormItem wrapperCol={{ span: 12, offset: 6 }}>
+                    <FormItem wrapperCol={{ span: 12, offset: 12 }}>
                         <Button type="primary" htmlType="submit">
                             Submit
                         </Button>
