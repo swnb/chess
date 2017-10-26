@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'src/form.css';
 import { Form, Input, Slider, Switch, Button } from 'antd';
+
 const FormItem = Form.Item;
 
 class CheckBoardForm extends React.Component {

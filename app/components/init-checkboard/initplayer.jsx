@@ -4,12 +4,12 @@ import { NetCheckerBoarder, store } from 'com/winner/net';
 import { Checkerplayer } from 'com/winner/sigel';
 import React from 'react';
 import CheckerForm from 'com/form/checkform';
-
+import { message } from 'antd';
 class InitPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            render: false,
+            init: true,
             size: 0,
             winCount: 5,
             arrP: [],
@@ -26,11 +26,11 @@ class InitPage extends React.Component {
                 this.setState({
                     size: Math.pow(size, 2),
                     winCount: winCount,
-                    render: true
+                    init: false
                 });
             },
             err() {
-                alert('请更新一下房间名看看吧');
+                message.info('请更新一下房间名看看吧');
             },
             intoRoom: data => {
                 this.data = data;
@@ -51,38 +51,33 @@ class InitPage extends React.Component {
         });
     }
     render() {
-        if (!this.state.render) {
-            return <CheckerForm initGame={this.initGame} />;
-        } else {
-            if (this.state.netChecker) {
-                const { size, winCount, roomId, room_uuid, side } = this.data;
-                return (
-                    <div>
-                        <NetCheckerBoarder
-                            size={size}
-                            winCount={winCount}
-                            myturn={side === 'X'}
-                            checkerType={side}
-                            otherCheckerType={side === 'X' ? 'O' : 'X'}
-                            roomId={room_uuid}
-                        />
-                        <HistoryList
-                            size={this.state.size}
-                            pos={this.state.arrP}
-                        />
-                    </div>
-                );
-            }
+        if (this.state.netChecker) {
+            const { size, winCount, roomId, room_uuid, side } = this.data;
             return (
                 <div>
-                    <Checkerplayer
-                        size={this.state.size}
-                        winCount={this.state.winCount}
+                    <NetCheckerBoarder
+                        size={size}
+                        winCount={winCount}
+                        myturn={side === 'X'}
+                        checkerType={side}
+                        otherCheckerType={side === 'X' ? 'O' : 'X'}
+                        roomId={room_uuid}
                     />
                     <HistoryList size={this.state.size} pos={this.state.arrP} />
                 </div>
             );
+        } else if (this.state.init) {
+            return <CheckerForm initGame={this.initGame} />;
         }
+        return (
+            <div>
+                <Checkerplayer
+                    size={this.state.size}
+                    winCount={this.state.winCount}
+                />
+                <HistoryList size={this.state.size} pos={this.state.arrP} />
+            </div>
+        );
     }
 }
 

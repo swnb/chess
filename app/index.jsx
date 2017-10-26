@@ -6,44 +6,52 @@ import InitPage from 'com/init-checkboard/initplayer';
 import { NetCheckerBoarder, store } from 'com/winner/net';
 import React from 'react';
 import ReactDom from 'react-dom';
-
+import { message } from 'antd';
 class Index extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             createRoom: false,
-            rooms: [],
+            showRoomList: true,
             intoRoom: false,
+            rooms: [],
             data: {},
             arrP: []
         };
         this.createRoom = this.createRoom.bind(this);
         this.getIntoRoom = this.getIntoRoom.bind(this);
     }
-    updateRoom(mes) {
+    setTrueOnly(stateName) {
+        const state = {
+            createRoom: false,
+            intoRoom: false,
+            showRoomList: false
+        };
+        state[stateName] = true;
+        this.setState(state);
+    }
+    updateRoom(roomList) {
         this.setState({
-            rooms: mes
+            rooms: roomList
         });
     }
     getIntoRoom(e) {
         const roomId = e.target.getAttribute('roomid');
-        const hocks = {
+        const hooks = {
             err() {
-                console.log('err room');
+                message.info('错误的房间');
             },
             intoRoom: data => {
                 this.setState({
-                    data,
-                    intoRoom: true
+                    data
                 });
+                this.setTrueOnly('intoRoom');
             }
         };
-        chooseRoom(roomId, hocks);
+        chooseRoom(roomId, hooks);
     }
     createRoom() {
-        this.setState({
-            createRoom: true
-        });
+        this.setTrueOnly('createRoom');
     }
     componentDidMount() {
         store.subscribe(() => {
@@ -51,18 +59,7 @@ class Index extends React.Component {
             if (Array.isArray(arrP)) {
                 this.setState({ arrP });
             } else if (arrP) {
-                this.setState(preState => {
-                    if (preState.intoRoom && preState.createRoom) {
-                        return {
-                            intoRoom: true,
-                            createRoom: true
-                        };
-                    } else {
-                        return preState.intoRoom
-                            ? { intoRoom: false }
-                            : { createRoom: false };
-                    }
-                });
+                this.setTrueOnly('showRoomList');
             }
         });
 
@@ -96,7 +93,8 @@ class Index extends React.Component {
         }
         if (this.state.createRoom) {
             return <InitPage />;
-        } else {
+        }
+        if (this.state.showRoomList) {
             return (
                 <RoomPage
                     room={this.state.rooms}
