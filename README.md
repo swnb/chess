@@ -57,6 +57,14 @@ node index.js
 
 后面加入`ui美化`,开心...
 
+
+最后的构建
+将`antd-ui`加入进去
+
+![示意图](./picture/pic7.png)
+
+完成了基本的功能，等待`ui`重构
+
 我之后会开一个专题谈谈这个项目的心得
 
 `gh-page`的测试的[地址在这里](https://swnb.github.io/react-project/views/second.html)
