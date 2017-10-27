@@ -1,7 +1,8 @@
 import 'src/homepage.css';
 
 import React from 'react';
-import { getPasswd, Passwd } from 'com/form/passwd';
+import ConfirmPasswd from 'com/form/passwd';
+
 function RoomPage(props) {
     let roomList = props.room.map((e, i) => {
         const title = `房间名称 ${e.id}`;
@@ -10,7 +11,7 @@ function RoomPage(props) {
             <div className="info" key={i}>
                 <article>{title}</article>
                 {info}
-                <Passwd
+                <ConfirmPasswd
                     roomId={e.id}
                     getIntoRoom={() => {
                         props.getIntoRoom(e.id);

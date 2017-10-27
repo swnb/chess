@@ -30,6 +30,7 @@ class HorizontalLoginForm extends React.Component {
 
         const passwordError =
             isFieldTouched('password') && getFieldError('password');
+
         return (
             <Form layout="vertical" onSubmit={this.props.handleSubmit}>
                 <FormItem
@@ -53,4 +54,4 @@ class HorizontalLoginForm extends React.Component {
 }
 
 const PasswdForm = Form.create()(HorizontalLoginForm);
-export default { PasswdForm, getPasswd };
+export { PasswdForm, getPasswd };
