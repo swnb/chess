@@ -65,6 +65,169 @@ node index.js
 
 完成了基本的功能，等待`ui`重构
 
+完成密码功能
+
+目录结构如下
+
+.
+
+├── app
+
+│   ├── api
+
+│   │   ├── chooseroom.js
+
+│   │   ├── makeroom.js
+
+│   │   ├── passwdconfirm.js
+
+│   │   ├── playing.js
+
+│   │   └── roomlist.js
+
+│   ├── components
+
+│   │   ├── base
+
+│   │   │   ├── checkerboard.jsx
+
+│   │   │   ├── clickbutton.jsx
+
+│   │   │   ├── history.jsx
+
+│   │   │   ├── historylist.jsx
+
+│   │   │   ├── info.jsx
+
+│   │   │   └── roompage.jsx
+
+│   │   ├── count
+
+│   │   │   └── count.jsx
+
+│   │   ├── form
+
+│   │   │   ├── checkform.jsx
+
+│   │   │   ├── passwdinput.jsx
+
+│   │   │   └── passwd.jsx
+
+│   │   ├── init-checkboard
+
+│   │   │   └── initplayer.jsx
+
+│   │   └── winner
+
+│   │       ├── net.jsx
+
+│   │       └── sigel.jsx
+
+│   ├── index.jsx
+
+│   ├── markdown.jsx
+
+│   ├── redux
+
+│   │   └── store.js
+
+│   ├── src
+
+│   │   └── css
+
+│   │       ├── checker.css
+
+│   │       ├── form.css
+
+│   │       ├── history.css
+
+│   │       ├── homepage.css
+
+│   │       ├── index.css
+
+│   │       └── test.css
+
+│   ├── test.jsx
+
+│   └── util
+
+│       └── win
+
+│           ├── c_win.js
+
+│           ├── ifwin.js
+
+│           ├── r_c_left_win.js
+
+│           ├── r_c_right_win.js
+
+│           └── r_win.js
+
+├── config.js
+
+├── controllers
+
+│   ├── routers
+
+│   │   └── index.js
+
+│   └── websocket
+
+│       ├── namespace
+
+│       │   ├── chooseroom.js
+
+│       │   ├── makeroom.js
+
+│       │   ├── passwdconfirm.js
+
+│       │   ├── roomlist.js
+
+│       │   ├── signroom.js
+
+│       │   └── tmp.js
+
+│       ├── readme.md
+
+│       └── websocket.js
+
+├── index.js
+
+├── LICENSE
+
+├── package.json
+
+├── picture
+
+│   ├── pic1.png
+
+│   ├── pic2.png
+
+│   ├── pic3.png
+
+│   ├── pic4.png
+
+│   ├── pic5.png
+
+│   ├── pic6.png
+
+│   └── pic7.png
+
+├── README.md
+
+├── sever.js
+
+├── template
+
+│   └── template.html
+
+├── webpack.config.js
+
+├── yarn-error.log
+
+└── yarn.lock
+
+
 我之后会开一个专题谈谈这个项目的心得
 
 `gh-page`的测试的[地址在这里](https://swnb.github.io/react-project/views/second.html)
