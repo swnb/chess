@@ -1,8 +1,7 @@
 import 'src/homepage.css';
 
 import React from 'react';
-import ConfirmPasswd from 'com/form/passwd';
-
+import Passwd from 'com/form/passwd';
 function RoomPage(props) {
     let roomList = props.room.map((e, i) => {
         const title = `房间名称 ${e.id}`;

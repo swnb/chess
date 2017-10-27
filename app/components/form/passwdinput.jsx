@@ -11,7 +11,6 @@ let getPasswd;
 class HorizontalLoginForm extends React.Component {
     constructor(props) {
         super(props);
-        this.passwdChange = this.passwdChange.bind(this);
         getPasswd = () => {
             return this.props.form.getFieldValue('password');
         };
