@@ -9,9 +9,10 @@ const makeRoom = (io, updateRoomList) => {
         const intoRoom = data => {
             socket.emit('into room', data);
         };
-        socket.on('make room', (roomId, size, winCount) => {
+        socket.on('make room', data => {
+            const { roomId, passwd, size, winCount } = data;
             //去空格
-            roomId = roomId.trim();
+
             if (global.emptyRoomList.length >= maxRoom) {
                 //如果溢出那么就算了..
                 socket.emit('room full');
@@ -24,6 +25,7 @@ const makeRoom = (io, updateRoomList) => {
                 //如果都满足,那么就添加
                 global.emptyRoomList.push({
                     module: { size, winCount },
+                    passwd,
                     id: roomId,
                     intoRoom
                 });

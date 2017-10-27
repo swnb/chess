@@ -35,8 +35,7 @@ class Index extends React.Component {
             rooms: roomList
         });
     }
-    getIntoRoom(e) {
-        const roomId = e.target.getAttribute('roomid');
+    getIntoRoom(roomId) {
         const hooks = {
             err() {
                 message.info('错误的房间');

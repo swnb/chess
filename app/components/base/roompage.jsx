@@ -1,20 +1,21 @@
 import 'src/homepage.css';
 
 import React from 'react';
-
+import { getPasswd, Passwd } from 'com/form/passwd';
 function RoomPage(props) {
     let roomList = props.room.map((e, i) => {
         const title = `房间名称 ${e.id}`;
         const info = `棋盘大小${e.module.size}  ${e.module.winCount}子棋`;
         const div = (
-            <div
-                className="info"
-                roomid={e.id}
-                onClick={props.getIntoRoom}
-                key={i}
-            >
+            <div className="info" key={i}>
                 <article>{title}</article>
                 {info}
+                <Passwd
+                    roomId={e.id}
+                    getIntoRoom={() => {
+                        props.getIntoRoom(e.id);
+                    }}
+                />
             </div>
         );
         return div;

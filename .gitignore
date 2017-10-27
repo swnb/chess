@@ -57,10 +57,6 @@ typings/
 
 # dotenv environment variables file
 .env
-<<<<<<< HEAD
-=======
-
 
 #dev
 dist/
->>>>>>> second-day
