@@ -10,7 +10,7 @@ function RoomPage(props) {
             <div className="info" key={i}>
                 <article>{title}</article>
                 {info}
-                <ConfirmPasswd
+                <Passwd
                     roomId={e.id}
                     getIntoRoom={() => {
                         props.getIntoRoom(e.id);
