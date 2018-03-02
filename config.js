@@ -1,3 +1,4 @@
+const path = require('path')
 module.exports = {
     port: 8080,
     socketioConfig: {
@@ -9,5 +10,8 @@ module.exports = {
         transports: ['polling', 'websocket'],
         cookie: true
     },
-    maxRoom: 10
+    maxRoom: 10,
+    path: {
+        bin: path.resolve(__dirname, 'bin')
+    }
 };
