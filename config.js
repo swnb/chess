@@ -12,6 +12,7 @@ module.exports = {
     },
     maxRoom: 10,
     path: {
-        bin: path.resolve(__dirname, 'bin')
+        bin: path.resolve(__dirname, 'bin'),
+        api: path.resolve(__dirname, 'api')
     }
 };
