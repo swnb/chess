@@ -14,8 +14,7 @@ module.exports = {
         publicPath: ''
     },
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.jsx?$/,
                 include: [path.resolve(__dirname, 'app')],
                 exclude: [
@@ -48,7 +47,10 @@ module.exports = {
     },
     devtool: 'source-map',
     devServer: {
-        contentBase: path.join('./dist')
+        contentBase: path.join('./dist'),
+        port: "8000"
     },
-    plugins: [new Myplugin(html_templat_path, { title: 'zzz' })]
+    plugins: [new Myplugin(html_templat_path, {
+        title: 'zzz'
+    })]
 };
