@@ -19,19 +19,21 @@ const binpath = require('../config').path.bin
 
 const path = require('path')
 
-const getwinner = (arr, checkSize, index, winCount) => {
+const getwinner = (arr, index, check_size, win_count, cb) => {
     const jsondata = {
         arr,
-        checkSize,
+        check_size,
         index,
-        winCount,
+        win_count,
     }
-    const golang = spawn(path.join(binpath, 'getWinner'), [JSON.stringify(jsondata)])
-    golang.on('close', () => {
-        console.log('exit')
-    })
+    const golang = spawn(path.join(binpath, 'getwinner'), [JSON.stringify(jsondata)])
+    golang.on('close', () => {})
     golang.stdout.on('data', (data) => {
-        console.log(`data: ${data}`)
+        cb(data.toString())
     })
-    return golang
+    golang.stderr.on('data', (data) => {
+        cb(data.toString())
+    })
 }
+
+module.exports = getwinner
