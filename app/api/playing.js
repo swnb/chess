@@ -22,7 +22,7 @@ const playing = (roomId, hooks) => {
         player.emit('exit');
     };
     const dispatch = (arr, index, checkSize, winCount) => {
-        player.emit('next_test', arr, index, checkSize, winCount)
+        player.emit('checknext', arr, index, checkSize, winCount)
     }
     return {
         emitNextMove,
