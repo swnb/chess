@@ -5,10 +5,7 @@ const path = require('path');
 const chooseRoom = require(path.join(__dirname, './namespace/chooseroom'));
 const roomList = require(path.join(__dirname, './namespace/roomlist'));
 const makeRoom = require(path.join(__dirname, './namespace/makeroom'));
-const passwdConfirm = require(path.join(
-    __dirname,
-    './namespace/passwdconfirm'
-));
+const passwdConfirm = require(path.join(__dirname, './namespace/passwdconfirm'));
 
 //已经创建的房间的名称
 global.emptyRoomList = [
@@ -23,17 +20,17 @@ global.id = [];
 global.playingRoomList = [];
 
 //重写他的方法,做为id的双向绑定
-global.emptyRoomList.push = function(arg) {
+global.emptyRoomList.push = function (arg) {
     global.id.push(arg.id);
     Array.prototype.push.call(global.emptyRoomList, arg);
 };
 
-global.emptyRoomList.getPasswd = function(arg) {
+global.emptyRoomList.getPasswd = function (arg) {
     const index = global.id.indexOf(arg);
     return global.emptyRoomList[index].passwd;
 };
 
-global.emptyRoomList.remove = function(arg) {
+global.emptyRoomList.remove = function (arg) {
     const index = global.id.indexOf(arg);
     global.id.splice(index, 1);
     const info = global.emptyRoomList.splice(index, 1);
