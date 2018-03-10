@@ -11,13 +11,24 @@ const playing = (roomId, hooks) => {
     player.on('room distory', () => {
         hooks.destory();
     });
+    player.on('winner', (i, arr) => {
+        console.log("winner winner chicken dinner")
+        hooks.winner(i, arr)
+    })
     const emitNextMove = i => {
         player.emit('nextMove', i);
     };
     const exitRoom = () => {
         player.emit('exit');
     };
-    return { emitNextMove, exitRoom };
+    const dispatch = (arr, index, checkSize, winCount) => {
+        player.emit('next_test', arr, index, checkSize, winCount)
+    }
+    return {
+        emitNextMove,
+        exitRoom,
+        dispatch,
+    };
 };
 
 export default playing;
