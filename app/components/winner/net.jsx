@@ -9,14 +9,15 @@ import Count from 'com/count/count';
 import { message } from 'antd';
 import React from 'react';
 import { getAction, store } from 'store/store';
+import special from 'util/specialcheck/specialcheck'
 
 class NetCheckerBoarder extends React.Component {
     constructor(props) {
         super(props);
 
         const [size, winCount, myturn, checkerType, otherCheckerType] = [
-            Math.pow(Number(this.props.size), 2),
-            Number(this.props.winCount),
+            Math.pow(parseInt(this.props.size), 2),
+            parseInt(this.props.winCount),
             this.props.myturn,
             this.props.checkerType,
             this.props.otherCheckerType
@@ -48,7 +49,7 @@ class NetCheckerBoarder extends React.Component {
     win(array, i, winarr) {
         const size = this.size;
         this.setState({ counting: false });
-        store.dispatch(getAction([...array]));
+        store.dispatch(getAction([...special(array, parseInt(this.props.size), winarr)]));
         const nextMover = this.state.myturn ? '下一步是对面先下棋' : '下一步是你先下';
         const winnerInfo =
             array[i] === this.state.checkerType
