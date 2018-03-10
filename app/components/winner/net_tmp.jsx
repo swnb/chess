@@ -27,18 +27,20 @@ class NetCheckerBoarder extends React.Component {
     constructor(props) {
         super(props);
 
-        // const [size, winCount, myturn, checkerType, otherCheckerType] = [
-        // Math.pow(Number(this.props.size), 2),
-        // Number(this.props.winCount),
-        // this.props.myturn,
-        // this.props.checkerType,
-        // this.props.otherCheckerType
-        // ];
-        // this.size = size;
-        // this.myturn = myturn;
-        // this.win_count = winCount;
+        const [size, winCount, myturn, checkerType, otherCheckerType] = [
+            Math.pow(Number(this.props.size), 2),
+            Number(this.props.winCount),
+            this.props.myturn,
+            this.props.checkerType,
+            this.props.otherCheckerType
+        ];
+        this.size = size;
+        this.myturn = myturn;
+        this.win_count = winCount;
         //生成点阵
         // this.ArrayP = getArrayPosition(size);
+
+        this.Array_tmp = Array(size).fill(null)
 
         this.state = {
             info: `规定棋盘是X的先下,你是 ${checkerType} `,
@@ -53,6 +55,8 @@ class NetCheckerBoarder extends React.Component {
         };
 
         this.buttonClick = this.buttonClick.bind(this);
+        this.clickByMyself = this.clickByMyself.bind(this)
+        this.clickByOther = this.clickByOther.bind(this)
         this.dispatch = this.dispatch.bind(this);
         this.timeOut = this.timeOut.bind(this);
         this.win = this.win.bind(this);
@@ -64,7 +68,7 @@ class NetCheckerBoarder extends React.Component {
             return flag;
         }
     }
-    win(array, i) {
+    win(array, i, winarr) {
         const size = this.size;
         this.setState({ counting: false });
         store.dispatch(getAction([...array]));
@@ -92,53 +96,53 @@ class NetCheckerBoarder extends React.Component {
             };
         });
     }
-    dispatch(i) {
-        //判断
-        if (this.myturn) {
-            //你不可以再下棋了
-            this.myturn = false;
-            this.setState({
-                counting: true
-            });
-            const info = `该对方下棋了 ${this.state.otherCheckerType}`;
-            this.setState({
-                info
-            });
-            //发布信息更新对方的棋盘
-            this.nextMove(i);
-            let Array_tmp = [...this.state.boxArray];
-            Array_tmp[i] = this.state.checkerType;
-            this.testApi(Array_tmp, i, this.size, this.win_count)
-            // const flag = this.getWinner(Array_tmp, i);
-            //更新自己的棋盘
-            if (!flag) {
-                this.setState({ boxArray: Array_tmp });
-            }
-        } else {
-            let Array_tmp = [...this.state.boxArray];
-            Array_tmp[i] = this.state.otherCheckerType;
-            const flag = this.getWinner(Array_tmp, i);
-            if (!flag) {
-                this.myturn = true;
-                this.setState({
-                    counting: true
-                });
-                const info = `该你下棋了 ${this.state.checkerType}`;
-                this.setState({
-                    info
-                });
-                this.setState({ boxArray: Array_tmp });
+    buttonClick(i, token = null) {
+        //如果棋子存在不作处理
+        if (!this.state.boxArray[i]) {
+            //如果是我点击的
+            if (this.myturn) {
+                this.clickByMyself(i)
+            } else if (token && token === 'nextMove') {
+                //如果是别人发布的
+                this.clickByOther(i)
             }
         }
     }
-    buttonClick(i, token = null) {
-        if (this.myturn || token === 'nextMove') {
-            if (!this.state.boxArray[i]) {
-                this.setState({ newPoint: i });
-                //发布点击信息
-                this.dispatch(i);
-            }
-        }
+    clickByMyself(i) {
+        this.myturn = false;
+        this.setState({
+            counting: true
+        });
+        const info = `该对方下棋了 ${this.state.otherCheckerType}`;
+        this.setState({
+            info
+        });
+        this.Array_tmp = [...this.state.boxArray];
+        this.Array_tmp[i] = this.state.checkerType;
+        const Array_tmp = [...this.Array_tmp]
+        this.testApi(Array_tmp, i, this.size, this.win_count)
+        //更新自己的棋盘
+        this.setState({
+            boxArray: Array_tmp
+        });
+    }
+    clickByOther(i) {
+        this.setState({ newPoint: i });
+        this.Array_tmp = [...this.state.boxArray];
+        this.Array_tmp[i] = this.state.otherCheckerType;
+        const Array_tmp = [...this.Array_tmp]
+        this.myturn = true;
+        this.setState({
+            counting: true
+        });
+        const info = `该你下棋了 ${this.state.checkerType}`;
+        this.setState({
+            info
+        });
+        this.setState({
+            boxArray: Array_tmp
+        });
+
     }
     destoryRoom() {
         store.dispatch({ type: 'DESTORY' });
@@ -163,8 +167,10 @@ class NetCheckerBoarder extends React.Component {
             destory: () => {
                 this.destoryRoom();
             },
-            winner: () => {
-                this.win()
+            winner: (i, arraystring) => {
+                const arr = JSON.parse(arraystring)
+                console.log(arr)
+                this.win(this.Array_tmp, i, arr)
             }
         };
         //挂钩子
