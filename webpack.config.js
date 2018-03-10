@@ -51,6 +51,6 @@ module.exports = {
         port: "8000"
     },
     plugins: [new Myplugin(html_templat_path, {
-        title: 'zzz'
+        title: 'playRoom'
     })]
 };
