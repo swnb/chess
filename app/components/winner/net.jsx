@@ -47,7 +47,9 @@ class NetCheckerBoarder extends React.Component {
         this.win = this.win.bind(this);
     }
     win(array, i, winarr) {
+        array = [...array]
         const size = this.size;
+        array[i] ? void 0 : array[i] = this.state.otherCheckerType
         this.setState({ counting: false });
         store.dispatch(getAction([...special(array, parseInt(this.props.size), winarr)]));
         const nextMover = this.state.myturn ? '下一步是对面先下棋' : '下一步是你先下';
