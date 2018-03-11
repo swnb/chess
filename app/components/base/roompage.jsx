@@ -63,7 +63,7 @@ function RoomPage(props) {
     );
     return (
         <div className="roomList">
-            <Row gutter={16}>{roomList}</Row>
+            <Row gutter={16} type="flex" justify="space-around" >{roomList}</Row>
         </div>
     );
 }
