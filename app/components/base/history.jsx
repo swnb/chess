@@ -7,7 +7,6 @@ function CheckerHistory(props) {
     const specialColor = 'orange'
     const arr = props.pos.map((e, i) => {
         if (e !== null && typeof e === 'object' && e.special) {
-            console.log(e.value)
             return <button key={i} style={{ backgroundColor: specialColor }}>{e.value}</button>
         }
         return <button key={i}>{e}</button>;
