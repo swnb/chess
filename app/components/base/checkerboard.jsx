@@ -5,7 +5,7 @@ function Checkerboard(props) {
     const size = props.size;
     const item = (start, end) => arr.slice(start, end + 1);
     const Q = () => {
-        let dom = [];
+        let dom = Array(size);
         let index = 0;
         for (let i = 0; i < size; i++) {
             dom.push(
