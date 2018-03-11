@@ -1,3 +1,7 @@
+.container {
+    margin: 10px;
+}
+
 h1 {
     margin: auto;
     text-align: center;
@@ -74,8 +78,3 @@ button:hover {
     border: 1px solid #9f2e06;
 }
 
-.list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
