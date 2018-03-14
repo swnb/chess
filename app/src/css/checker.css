@@ -1,4 +1,4 @@
-.winCount {
+/* .winCount {
     display: flex;
     align-content: center;
     align-items: center;
@@ -9,7 +9,7 @@
     border-radius: 15px;
     background-color: rgba(142, 217, 251, 0.89);
     font-size: 15px;
-}
+} */
 
 .winCount>div>div {
     color: rgb(255, 115, 0);

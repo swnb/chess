@@ -1,54 +1,54 @@
-import React from 'react'
+import React from 'react';
+
 import { List, Avatar, Badge } from 'antd';
 
+
 function Infolists(props) {
-    let myhistory = []
+    const winNumber = [...props.winNumber]
     let otherhistory = []
-    props.playhistorys.forEach(ele => {
+    let myhistory = []
+    props.playhistorys.forEach((ele, i) => {
         switch (ele) {
             case "success":
-                myhistory.push(<Badge status="success" />)
-                otherhistory.push(<Badge status="default" />)
+                myhistory.push(<Badge key={i} status="success" />)
+                otherhistory.push(<Badge key={i} status="default" />)
                 break
             case "default":
-                otherhistory.push(<Badge status="success" />)
-                myhistory.push(<Badge status="default" />)
+                otherhistory.push(<Badge key={i} status="success" />)
+                myhistory.push(<Badge key={i} status="default" />)
                 break
             case "processing":
-                otherhistory.push(<Badge status="processing" />)
-                myhistory.push(<Badge status="processing" />)
+                otherhistory.push(<Badge key={i} status="processing" />)
+                myhistory.push(<Badge key={i} status="processing" />)
         }
     })
-
     const data = [
         {
-            title: '你的数据',
+            title: `我方的数据 胜 ${winNumber[0]} - 负 ${winNumber[1]}`,
             backgroundColor: '#87d068',
             playhistory: myhistory
         },
         {
-            title: '对方的数据',
+            title: `对方的数据 胜 ${winNumber[1]} - 负 ${winNumber[0]}`,
             backgroundColor: 'rgb(77, 204, 169)',
             playhistory: otherhistory
         },
     ];
 
-    return (
-        <List
-            itemLayout="horizontal"
-            dataSource={data}
-            renderItem={item => (
-                <List.Item
-                >
-                    <List.Item.Meta
-                        avatar={<Avatar style={{ backgroundColor: item.backgroundColor }} icon="user" />}
-                        title={<h3 >{item.title}</h3>}
-                        description={item.playhistory}
-                    />
-                </List.Item>
-            )}
-        />
-    )
+    return <List
+        itemLayout="horizontal"
+        dataSource={data}
+        renderItem={item => (
+            <List.Item
+            >
+                <List.Item.Meta
+                    avatar={<Avatar style={{ backgroundColor: item.backgroundColor }} icon="user" />}
+                    title={item.title}
+                    description={item.playhistory}
+                />
+            </List.Item>
+        )}
+    />
 }
 
 export default Infolists

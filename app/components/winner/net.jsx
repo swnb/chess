@@ -2,6 +2,8 @@ import 'src/checker.css';
 import 'src/index.css';
 
 import playing from 'api/playing';
+import Infolists from 'base/infolist'
+
 import Checkerboard from 'base/checkerboard';
 import Clickbutton from 'base/clickbutton';
 import Info from 'base/info';
@@ -30,6 +32,7 @@ class NetCheckerBoarder extends React.Component {
 
         this.state = {
             info: `规定棋盘是X的先下,你是 ${checkerType} `,
+            winhistory: ['processing'],   //'success' 'default' 'processing'
             checkerType,
             otherCheckerType,
             myWinNumber: 0,
@@ -53,11 +56,21 @@ class NetCheckerBoarder extends React.Component {
         this.setState({ counting: false });
         store.dispatch(getAction([...special(array, parseInt(this.props.size), winarr)]));
         const nextMover = this.state.myturn ? '下一步是对面先下棋' : '下一步是你先下';
-        const winnerInfo =
-            array[i] === this.state.checkerType
-                ? `你赢了,恭喜啊! ${nextMover}`
-                : `对面...赢了 ${nextMover}`;
-        const info = `${winnerInfo}`;
+
+        //更新状态标示t
+        this.setState(preState => {
+            const winhistory = [...preState.winhistory]
+            winhistory.pop()
+            if (array[i] === this.state.checkerType) {
+                winhistory.push('success', 'processing')
+                return { winhistory }
+            } else {
+                winhistory.push('default', 'processing')
+                return { winhistory }
+            }
+        })
+
+        const info = array[i] === this.state.checkerType ? `你赢了,恭喜啊! ${nextMover}` : `对面...赢了 ${nextMover}`;
         this.setState(preState => {
             const [myWinNumber, otherWinNumber] =
                 array[i] === this.state.checkerType
@@ -188,11 +201,14 @@ class NetCheckerBoarder extends React.Component {
                 />
             );
         });
+
+
+        const winNumber = [this.state.myWinNumber, this.state.otherWinNumber]
+
         return (
             <div>
-                <div className="winCount">
-                    <div>你赢的数目是 {`${this.state.myWinNumber}`}</div>
-                    <div>对面赢的数目是 {`${this.state.otherWinNumber}`}</div>
+                <div>
+                    <Infolists winNumber={winNumber} playhistorys={this.state.winhistory} />
                 </div>
                 <Info info={this.state.info} />
                 <Count
