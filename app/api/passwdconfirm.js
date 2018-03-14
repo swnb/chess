@@ -1,9 +1,14 @@
 import io from 'socket.io-client';
 //{err(),success(),errRoom()}
-const passwdComfirm = ({ roomId, passwd }, hooks) => {
+const passwdComfirm = ({
+    roomId,
+    passwd
+}, hooks) => {
     const socket = io('/passwdconfirm');
-    console.log(roomId, passwd);
-    socket.emit('passwd confirm', { roomId, passwd });
+    socket.emit('passwd confirm', {
+        roomId,
+        passwd
+    });
     socket.on('err passwd', () => {
         hooks.err();
     });
