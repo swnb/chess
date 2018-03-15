@@ -12,28 +12,28 @@
 // }
 
 const {
-    spawn
-} = require('child_process')
+	spawn
+} = require('child_process');
 
-const binpath = require('../config').path.bin
+const binpath = require('../config').path.bin;
 
-const path = require('path')
+const path = require('path');
 
 const getwinner = (arr, index, check_size, win_count, cb) => {
-    const jsondata = {
-        arr,
-        check_size,
-        index,
-        win_count,
-    }
-    const golang = spawn(path.join(binpath, 'getwinner'), [JSON.stringify(jsondata)])
-    golang.on('close', () => {})
-    golang.stdout.on('data', (data) => {
-        cb(data.toString())
-    })
-    golang.stderr.on('data', (data) => {
-        cb(data.toString())
-    })
-}
+	const jsondata = {
+		arr,
+		check_size,
+		index,
+		win_count,
+	};
+	const golang = spawn(path.join(binpath, 'getwinner'), [JSON.stringify(jsondata)]);
+	golang.on('close', () => {});
+	golang.stdout.on('data', (data) => {
+		cb(data.toString());
+	});
+	golang.stderr.on('data', (data) => {
+		cb(data.toString());
+	});
+};
 
-module.exports = getwinner
+module.exports = getwinner;
