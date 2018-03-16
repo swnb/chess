@@ -6,7 +6,7 @@ import Infolists from 'base/infolist';
 
 import Checkerboard from 'base/checkerboard';
 import Clickbutton from 'base/clickbutton';
-import Info from 'base/info';
+import Info from 'com/info/info';
 import Count from 'com/count/count';
 import { notification, Button } from 'antd';
 import React from 'react';
@@ -73,9 +73,9 @@ class NetCheckerBoarder extends React.Component {
 		const info = array[i] === this.state.checkerType ? `你赢了,恭喜啊! ${nextMover}` : `对面...赢了 ${nextMover}`;
 		this.setState(preState => {
 			const [myWinNumber, otherWinNumber] =
-                array[i] === this.state.checkerType
-                	? [preState.myWinNumber + 1, preState.otherWinNumber]
-                	: [preState.myWinNumber, preState.otherWinNumber + 1];
+				array[i] === this.state.checkerType
+					? [preState.myWinNumber + 1, preState.otherWinNumber]
+					: [preState.myWinNumber, preState.otherWinNumber + 1];
 			//作为转变的是之前哦myturn;
 			this.myturn = !preState.myturn;
 			return {
@@ -213,21 +213,21 @@ class NetCheckerBoarder extends React.Component {
 
 
 		const winNumber = [this.state.myWinNumber, this.state.otherWinNumber];
-
 		return (
-			<div>
+			<div id='net'>
 				<div>
 					<Infolists winNumber={winNumber} playhistorys={this.state.winhistory} />
 				</div>
-				<Info info={this.state.info} />
+				<Info info={this.state.info} width={`${parseInt(window.innerWidth * 0.8, 10)}px`} height={'60px'} />
 				<Count
 					largeNum={30}
 					counting={this.state.counting}
 					timeOut={this.timeOut}
 				/>
 				<Checkerboard size={Math.sqrt(this.size)} arrP={arr_tmp} />
-				<Button type="danger" onClick={this.exitRoom}> 认输/退出房间</Button>
-			</div>
+				<Button type="danger" onClick={this.exitRoom} style={{ margin: '2% auto', display: 'block' }}> 认输/退出房间</Button>
+
+			</div >
 		);
 	}
 }
