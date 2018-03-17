@@ -7,11 +7,9 @@
     "author": "swnb <1786718956@qq.com>",
     "license": "MIT",
     "scripts": {
-        "dev": "webpack-dev-server --open",
-        "built": "webpack ",
-        "hot-built": "webpack --watch",
+        "hot-built": "webpack --watch --config webpack.deploy.config.js",
         "server": "node index.js",
-        "product": "NODE_ENV=production webpack --config webpack.deploy.config.js --progress"
+        "built": "NODE_ENV=production webpack --config webpack.deploy.config.js --progress"
     },
     "dependencies": {
         "antd": "^3.3.0",
