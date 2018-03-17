@@ -80,7 +80,7 @@ class Info extends React.Component {
         return objC
     }
     canvasInit() {
-        canvasCreate(parseInt(this.width, 10), parseInt(this.height, 10))
+        canvasCreate(parseInt(this.width, 10), parseInt(this.height, 10), 80)
     }
     componentDidMount() {
         this.canvasInit()
