@@ -43,6 +43,11 @@ class Line {
     }
     draw() {
         this.ctx.beginPath()
+        this.ctx.strokeStyle = 'grey';
+        this.ctx.rect(0, 0, this.w, this.h)
+        this.ctx.stroke()
+        this.ctx.strokeStyle = 'white'
+        this.ctx.beginPath()
         //左边
         if (this.startW === 0) {
 
