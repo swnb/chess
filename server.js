@@ -33,7 +33,9 @@ const main = async () => {
   });
 
   // 静态server
-  const staticServer = staticFile(path.join(__dirname, 'dist'));
+  const staticServer = staticFile(path.join(__dirname, 'dist'), {
+    maxage: 60 * 60 * 60 * 1000,
+  });
 
   app.use(router.routes());
   app.use(staticServer);
