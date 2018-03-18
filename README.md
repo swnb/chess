@@ -1,236 +1,57 @@
-# react-project
-this is  a personal project for react
+# chess
 
-第二天的代码完成了
-* 自定义棋盘大小
-* 自定义输赢的数目
-* 棋盘历史
-* 棋盘sort函数bug修复
-* 棋盘引入redux来处理信息
+一个在线对弈的棋盘类单页面应用.
 
-主要对于react的棋盘教程的案例进行扩展，可以自定义棋盘大小，自定义胜利的棋子数目,还有判断输赢的算法做了优化。
-现在的暂时的效果在[这里](https://swnb.github.io/react-project/views/second.html),欢迎大家帮我测试一下...后面放入服务器,加点颜色,加入websocket,做成可以定制的游戏,代码日后可以开个专题来说.
+技术栈 => `react`+`antd`+`node`+`socket.io`+`golang`
 
-这个项目主要对于`react`的棋盘教程的案例进行扩展，可以自定义你的棋盘大小，还有判断输赢的算法做了优化。
+[服务器链接](http://116.85.51.240:8080/) (要两个人才能玩)
+>js的代码在打包混淆压缩后还有1M多(一开始没想到),加上服务器带宽一般,所以要加载久一点,已经设置额缓存,请谅解..
 
-**目前的**效果图
-
-![](./picture/pic1.png)
-![](./picture/pic2.png)
-![](./picture/pic3.png)
-![](./picture/pic4.png)
-![](./picture/pic5.png)
-![](./picture/pic6.png)
-
-第三天代做的事情
-* 将它改造成为`websocket`
-* 添加颜色,优化代码,历史记录用红线连接起来..
-* ~~重构代码,逻辑组件和ui组件分离~~ (完成) 
-
-最后两天的开发工作也差不多完成了,因为本人没有服务器,就不提供测试地址了
-
+***
 完成的功能
-* 通过socket.io,成功将项目改成了`websocket`
-* 创建房间房间,生成游戏房间
-* 自定义规则和期盼大小
-* 进入房间计算输赢次数
-* 根据每次结果生成历史记录
-* 毁灭房间功能
-* 房间`namespace`加密
+- [x] 创建房间 --完成
+- [x] 登录房间 --完成
+- [x] 自定义房间大小和输赢规则
 
-你只需要
-```
-git clone https://github.com/swnb/react-project.git
+***
+开发
 
-cd react-project
+**注意 该项目基于`linux`开发,虽然`node`跨平台,但是`golang`只编译了`linux`平台的,所以需要在`linux`系统上才能正常运行**
 
-yarn 
+首先你需要有`node 6`的版本来支持`es6/7`的新特性,其次,你需要安装[yarn](https://yarnpkg.com/en/docs/install)
 
-webpack 
-
-node index.js
+下载项目
+```shell
+    git clone https://github.com/swnb/chess.git
 ```
 
+下载依赖
+```shell
+    cd chess
 
+    yarn 
+```
 
-就可以成功在[8080端口](http://localhost:8080)查看..之后创建房间,让你的兄弟进入房间,你们开始比赛...
+打包前端代码
+```shell
+    yarn run build
+```
 
-后面加入`ui美化`,开心...
+运行服务
 
+```shell
+    yarn run server
+```
 
-最后的构建
-将`antd-ui`加入进去
+登录本地`8080`端口查看 => [这里](http://localhost:8080/)
 
-![示意图](./picture/pic7.png)
 
-完成了基本的功能，等待`ui`重构
+***
+示例
 
-完成密码功能
-
-目录结构如下
-
-.
-
-├── app
-
-│   ├── api
-
-│   │   ├── chooseroom.js
-
-│   │   ├── makeroom.js
-
-│   │   ├── passwdconfirm.js
-
-│   │   ├── playing.js
-
-│   │   └── roomlist.js
-
-│   ├── components
-
-│   │   ├── base
-
-│   │   │   ├── checkerboard.jsx
-
-│   │   │   ├── clickbutton.jsx
-
-│   │   │   ├── history.jsx
-
-│   │   │   ├── historylist.jsx
-
-│   │   │   ├── info.jsx
-
-│   │   │   └── roompage.jsx
-
-│   │   ├── count
-
-│   │   │   └── count.jsx
-
-│   │   ├── form
-
-│   │   │   ├── checkform.jsx
-
-│   │   │   ├── passwdinput.jsx
-
-│   │   │   └── passwd.jsx
-
-│   │   ├── init-checkboard
-
-│   │   │   └── initplayer.jsx
-
-│   │   └── winner
-
-│   │       ├── net.jsx
-
-│   │       └── sigel.jsx
-
-│   ├── index.jsx
-
-│   ├── markdown.jsx
-
-│   ├── redux
-
-│   │   └── store.js
-
-│   ├── src
-
-│   │   └── css
-
-│   │       ├── checker.css
-
-│   │       ├── form.css
-
-│   │       ├── history.css
-
-│   │       ├── homepage.css
-
-│   │       ├── index.css
-
-│   │       └── test.css
-
-│   ├── test.jsx
-
-│   └── util
-
-│       └── win
-
-│           ├── c_win.js
-
-│           ├── ifwin.js
-
-│           ├── r_c_left_win.js
-
-│           ├── r_c_right_win.js
-
-│           └── r_win.js
-
-├── config.js
-
-├── controllers
-
-│   ├── routers
-
-│   │   └── index.js
-
-│   └── websocket
-
-│       ├── namespace
-
-│       │   ├── chooseroom.js
-
-│       │   ├── makeroom.js
-
-│       │   ├── passwdconfirm.js
-
-│       │   ├── roomlist.js
-
-│       │   ├── signroom.js
-
-│       │   └── tmp.js
-
-│       ├── readme.md
-
-│       └── websocket.js
-
-├── index.js
-
-├── LICENSE
-
-├── package.json
-
-├── picture
-
-│   ├── pic1.png
-
-│   ├── pic2.png
-
-│   ├── pic3.png
-
-│   ├── pic4.png
-
-│   ├── pic5.png
-
-│   ├── pic6.png
-
-│   └── pic7.png
-
-├── README.md
-
-├── sever.js
-
-├── template
-
-│   └── template.html
-
-├── webpack.config.js
-
-├── yarn-error.log
-
-└── yarn.lock
-
-
-我之后会开一个专题谈谈这个项目的心得
-
-`gh-page`的测试的[地址在这里](https://swnb.github.io/react-project/views/second.html)
-
-
-附带一个自己写的webpack学习的插件，有兴趣，可以在[这里看](https://github.com/swnb/webpack-plugin)，主要实现html-webpack-plugin的一些简答功能，比如模板等。
+![创建房间](./picture/pic1.png)
+![定义房间](./picture/pic2.png)
+![进入房间](./picture/pic3.png)
+![对弈](./picture/pic4.png)
+![](./picture/pic5.png)
+![历史记录](./picture/pic6.png)
