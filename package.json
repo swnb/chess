@@ -9,7 +9,7 @@
     "scripts": {
         "hot-built": "webpack --watch --config webpack.deploy.config.js",
         "server": "node index.js",
-        "built": "NODE_ENV=production webpack --config webpack.deploy.config.js --progress"
+        "build": "NODE_ENV=production webpack --config webpack.deploy.config.js --progress"
     },
     "dependencies": {
         "antd": "^3.3.0",
