@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'src/form.css';
-import { Form, Input, Slider, Switch, Button } from 'antd';
+import { Form, Input, Slider, Switch, Button, Icon } from 'antd';
 const FormItem = Form.Item;
 
 class CheckBoardForm extends React.Component {
@@ -54,7 +54,11 @@ class CheckBoardForm extends React.Component {
                                     max: 10
                                 }
                             ]
-                        })(<Input size="large" placeholder="房间名称" />)}
+                        })(<Input
+                            size="large"
+                            placeholder="房间名称"
+                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        />)}
                     </FormItem>
 
                     <Switch
@@ -62,14 +66,16 @@ class CheckBoardForm extends React.Component {
                         unCheckedChildren="关"
                         onChange={this.handlePasswdChange}
                     />
-                    <FormItem {...formItemLayout} label="是否需要密码呢?">
+                    <FormItem {...formItemLayout} label={是否需要密码呢 ?}>
                         {getFieldDecorator('passwd', {
                             initialValue: null
                         })(
                             <Input
+                                type="password"
                                 size="large"
                                 placeholder="输入密码，可以不填写"
                                 disabled={!this.state.passwordRequired}
+                                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             />
                         )}
                     </FormItem>
