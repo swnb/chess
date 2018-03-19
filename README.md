@@ -3,7 +3,7 @@
 一个在线对弈的棋盘类单页面应用.
 
 
-技术栈 => `react`+`antd`+`node`+`socket.io`+`golang`
+主要的使用技术 => `react`+`antd`+`node`+`socket.io`+`golang`
 
 
 [服务器链接](http://116.85.51.240:8080/) (要两个人才能玩)
