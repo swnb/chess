@@ -66,7 +66,7 @@ class CheckBoardForm extends React.Component {
                         unCheckedChildren="关"
                         onChange={this.handlePasswdChange}
                     />
-                    <FormItem {...formItemLayout} label={是否需要密码呢 ?}>
+                    <FormItem {...formItemLayout} label="是否需要密码呢 ?">
                         {getFieldDecorator('passwd', {
                             initialValue: null
                         })(
@@ -130,7 +130,7 @@ class CheckBoardForm extends React.Component {
                         )}
                     </FormItem>
 
-                    <FormItem wrapperCol={{ span: 12, offset: 12 }}>
+                    <FormItem wrapperCol={{ span: 12, offset: 11 }}>
                         <Button type="primary" htmlType="submit">
                             Submit
                         </Button>
