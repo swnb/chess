@@ -130,7 +130,7 @@ class CheckBoardForm extends React.Component {
                         )}
                     </FormItem>
 
-                    <FormItem wrapperCol={{ span: 12, offset: 11 }}>
+                    <FormItem wrapperCol={{ span: 12, offset: 10 }}>
                         <Button type="primary" htmlType="submit">
                             Submit
                         </Button>
