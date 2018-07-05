@@ -1,11 +1,12 @@
 package main
 
 import (
-	"checkwin"
 	"encoding/json"
 	"log"
 	"math"
 	"os"
+
+	"../checkwin"
 )
 
 func makeArrP(size int) [][2]int {
