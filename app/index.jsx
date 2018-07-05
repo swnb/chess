@@ -1,12 +1,13 @@
-import chooseRoom from 'api/chooseroom';
-import roomlist from 'api/roomlist';
-import HistoryList from 'base/historylist';
-import RoomPage from 'base/roompage';
-import InitPage from 'com/init-checkboard/initplayer';
-import { NetCheckerBoarder, store } from 'com/winner/net';
-import React from 'react';
-import ReactDom from 'react-dom';
-import { message } from 'antd';
+import chooseRoom from "api/chooseroom";
+import roomlist from "api/roomlist";
+import HistoryList from "base/historylist";
+import RoomPage from "base/roompage";
+import InitPage from "com/init-checkboard/initplayer";
+import { NetCheckerBoarder, store } from "com/winner/net";
+import React from "react";
+import ReactDom from "react-dom";
+import { message } from "antd";
+
 class Index extends React.Component {
     constructor(props) {
         super(props);
@@ -38,19 +39,19 @@ class Index extends React.Component {
     getIntoRoom(roomId) {
         const hooks = {
             err() {
-                message.info('错误的房间');
+                message.info("错误的房间");
             },
             intoRoom: data => {
                 this.setState({
                     data
                 });
-                this.setTrueOnly('intoRoom');
+                this.setTrueOnly("intoRoom");
             }
         };
         chooseRoom(roomId, hooks);
     }
     createRoom() {
-        this.setTrueOnly('createRoom');
+        this.setTrueOnly("createRoom");
     }
     componentDidMount() {
         store.subscribe(() => {
@@ -58,7 +59,7 @@ class Index extends React.Component {
             if (Array.isArray(arrP)) {
                 this.setState({ arrP });
             } else if (arrP) {
-                this.setTrueOnly('showRoomList');
+                this.setTrueOnly("showRoomList");
             }
         });
 
@@ -78,9 +79,9 @@ class Index extends React.Component {
                     <NetCheckerBoarder
                         size={size}
                         winCount={winCount}
-                        myturn={side === 'X'}
+                        myturn={side === "X"}
                         checkerType={side}
-                        otherCheckerType={side === 'X' ? 'O' : 'X'}
+                        otherCheckerType={side === "X" ? "O" : "X"}
                         roomId={room_uuid}
                     />
                     <HistoryList
@@ -105,4 +106,4 @@ class Index extends React.Component {
     }
 }
 
-ReactDom.render(<Index />, document.querySelector('.container'));
+ReactDom.render(<Index />, document.querySelector(".container"));
