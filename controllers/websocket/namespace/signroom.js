@@ -21,10 +21,11 @@ const signRoom = (io, roomId) => {
     // 实验性api
     socket.on('checknext', (arr, index, checkSize, winCount) => {
       getwinner(arr, index, checkSize, winCount, (data) => {
-        if (data.trim() === 'false') {
+        const result = data.trim();
+        if (result === 'false') {
           socket.broadcast.emit('next', index);
         } else {
-          room.emit('winner', index, data.trim());
+          room.emit('winner', index, result);
         }
       });
     });

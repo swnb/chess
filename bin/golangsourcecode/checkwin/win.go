@@ -117,6 +117,7 @@ func rcLeft(arr []string, arrP [][2]int, index int, pos [2]int, winCount int, c 
 	}
 	c.signalChan <- winFlag
 }
+
 func rcRight(arr []string, arrP [][2]int, index int, pos [2]int, winCount int, c *channel) {
 	rightArr := make([]int, 0, len(arrP))
 	for i, v := range arrP {
